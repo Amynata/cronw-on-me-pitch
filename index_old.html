@@ -1079,56 +1079,6 @@ body {
   line-height: 1.55;
 }
 
-/* ─── CHARTS SVG ─── */
-.chart-block {
-  border: 1px solid var(--rule);
-  background: var(--white);
-  margin-bottom: 16px;
-}
-
-.chart-block-label {
-  padding: 14px 28px;
-  border-bottom: 1px solid var(--rule);
-  font-size: 0.72rem;
-  font-weight: 400;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--amber);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.chart-block-label .chart-tag {
-  color: var(--taupe);
-  letter-spacing: 0.12em;
-}
-
-.chart-block-label .chart-dot {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  margin-right: 8px;
-  vertical-align: middle;
-}
-
-.chart-wrap {
-  padding: 24px 28px 16px;
-}
-
-.chart {
-  width: 100%;
-  height: auto;
-  display: block;
-  overflow: visible;
-}
-
-.ytick { font-size: 11px; fill: var(--taupe); font-family: 'DM Sans'; }
-.xtick { font-size: 11px; fill: var(--noir); font-family: 'DM Sans'; }
-.xzone { font-size: 10px; fill: var(--taupe); letter-spacing: 0.14em; text-transform: uppercase; font-family: 'DM Sans'; }
-.endlab { font-size: 15px; font-weight: 500; font-family: 'DM Sans'; }
-
 /* ─── RESPONSIVE ─── */
 @media (max-width: 900px) {
   .sidenav { width: var(--nav-w-sm); }
@@ -1229,7 +1179,7 @@ body {
       </a>
       <div class="nav-subsections">
         <a href="#s5-1" class="nav-sub-link">5.1 Réalisations</a>
-        <a href="#s5-2" class="nav-sub-link">5.2 Roadmap produit</a>
+        <a href="#s5-2" class="nav-sub-link">5.2 Prochaines étapes</a>
         <a href="#s5-3" class="nav-sub-link">5.3 Projections</a>
       </div>
     </div>
@@ -1242,7 +1192,8 @@ body {
       </a>
       <div class="nav-subsections">
         <a href="#s6-1" class="nav-sub-link">6.1 Nos besoins</a>
-        <a href="#s6-3" class="nav-sub-link">6.2 Financer</a>
+        <a href="#s6-2" class="nav-sub-link">6.2 Besoin financier</a>
+        <a href="#s6-3" class="nav-sub-link">6.3 Financer</a>
       </div>
     </div>
 
@@ -1869,70 +1820,19 @@ body {
         <span class="sub-section-num">3.2</span>
         <span class="sub-section-title">La concurrence</span>
       </div>
-
-      <!-- Tableau comparatif -->
-      <div style="overflow-x:auto; margin-bottom:32px;">
-        <table style="width:100%; border-collapse:collapse; background:var(--white); border:1px solid var(--rule); font-size:0.92rem;">
-          <thead>
-            <tr style="border-bottom:2px solid var(--amber);">
-              <th style="padding:18px 20px; text-align:left; font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:400; color:var(--taupe); width:22%;">Critère</th>
-              <th style="padding:18px 20px; text-align:left; font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:400; background:#fdf8f0; border-left:3px solid var(--amber); width:26%;">Crown On Me</th>
-              <th style="padding:18px 20px; text-align:left; font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:400; width:26%;">Zenaba</th>
-              <th style="padding:18px 20px; text-align:left; font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:400; width:26%;">L'Oréal Style My Hair</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr style="border-bottom:1px solid var(--rule);">
-              <td style="padding:14px 20px; font-weight:400; color:var(--noir);">Positionnement</td>
-              <td style="padding:14px 20px; background:#fdf8f0; border-left:3px solid var(--amber); color:var(--noir);">Simulation IA + réservation<br><span style="font-size:0.82rem;color:var(--taupe);">Spécialisé cheveux texturés</span></td>
-              <td style="padding:14px 20px; color:var(--noir);">Annuaire / mise en relation<br><span style="font-size:0.82rem;color:var(--taupe);">Spécialisé coiffure afro</span></td>
-              <td style="padding:14px 20px; color:var(--noir);">Essai couleur virtuel (AR)<br><span style="font-size:0.82rem;color:var(--taupe);">Grand public — tous types de cheveux</span></td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--rule);">
-              <td style="padding:14px 20px; font-weight:400; color:var(--noir);">Simulation IA</td>
-              <td style="padding:14px 20px; background:#fdf8f0; border-left:3px solid var(--amber); color:var(--amber); font-weight:400;">✓ Oui — IA image-to-image (Fal.ai Flux.1) optimisée cheveux texturés</td>
-              <td style="padding:14px 20px; color:var(--taupe);">✗ Non</td>
-              <td style="padding:14px 20px; color:var(--taupe);">Couleur uniquement (AR Modiface) — pas de simulation de coiffure afro</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--rule);">
-              <td style="padding:14px 20px; font-weight:400; color:var(--noir);">Spécialisation afro</td>
-              <td style="padding:14px 20px; background:#fdf8f0; border-left:3px solid var(--amber); color:var(--amber); font-weight:400;">✓ 100% cheveux texturés — box braids, locks, twist…</td>
-              <td style="padding:14px 20px; color:var(--noir);">✓ 100% coiffure afro</td>
-              <td style="padding:14px 20px; color:var(--taupe);">✗ Grand public — pas de styles afro spécifiques</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--rule);">
-              <td style="padding:14px 20px; font-weight:400; color:var(--noir);">Réservation salon</td>
-              <td style="padding:14px 20px; background:#fdf8f0; border-left:3px solid var(--amber); color:var(--amber); font-weight:400;">✓ Intégrée — simulation jointe au RDV</td>
-              <td style="padding:14px 20px; color:var(--noir);">✓ Mise en relation + échange</td>
-              <td style="padding:14px 20px; color:var(--taupe);">Redirection vers salons L'Oréal partenaires</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--rule);">
-              <td style="padding:14px 20px; font-weight:400; color:var(--noir);">Portfolio coiffeuses</td>
-              <td style="padding:14px 20px; background:#fdf8f0; border-left:3px solid var(--amber); color:var(--amber); font-weight:400;">✓ Réalisations réelles = styles de simulation</td>
-              <td style="padding:14px 20px; color:var(--noir);">✓ Profils vérifiés avec photos</td>
-              <td style="padding:14px 20px; color:var(--taupe);">✗ Catalogue L'Oréal uniquement</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--rule);">
-              <td style="padding:14px 20px; font-weight:400; color:var(--noir);">Modèle</td>
-              <td style="padding:14px 20px; background:#fdf8f0; border-left:3px solid var(--amber); color:var(--noir);">B2B2C · Freemium + abo</td>
-              <td style="padding:14px 20px; color:var(--noir);">Marketplace · Commission</td>
-              <td style="padding:14px 20px; color:var(--noir);">Gratuit · Push produit L'Oréal</td>
-            </tr>
-            <tr>
-              <td style="padding:14px 20px; font-weight:400; color:var(--noir);">Couverture</td>
-              <td style="padding:14px 20px; background:#fdf8f0; border-left:3px solid var(--amber); color:var(--noir);">France (lancement) → USA → Afrique</td>
-              <td style="padding:14px 20px; color:var(--noir);">France — 400+ coiffeuses</td>
-              <td style="padding:14px 20px; color:var(--noir);">82 pays — grand public</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="card" style="border-left:4px solid var(--amber); padding:28px 32px;">
-        <div class="card-accent" style="background:transparent;"></div>
-        <p style="font-size:0.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin-bottom:12px;">Avantage différenciateur</p>
-        <p style="font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:300; color:var(--noir); line-height:1.4; margin-bottom:12px;">Crown On Me est <em style="font-style:italic;color:var(--amber);">le seul acteur à combiner</em> simulation IA spécialisée cheveux texturés + connexion directe avec les coiffeuses.</p>
-        <p class="card-desc">Zenaba fait de la mise en relation sans simulation. L'Oréal fait de la simulation couleur généraliste sans spécialisation afro. Aucun ne permet de voir sa coiffure sur sa propre photo ET de réserver la coiffeuse qui la réalise.</p>
+      <div class="todo-block">
+        <div class="todo-inner">
+          <span class="todo-badge">À compléter</span>
+          <p class="todo-title">Analyse concurrentielle</p>
+          <p class="todo-desc">Présenter les acteurs existants, leurs forces et faiblesses, et le positionnement différenciateur de Crown On Me.</p>
+          <div class="todo-items">
+            <span class="todo-item">Apps de simulation beauté</span>
+            <span class="todo-item">Plateformes de réservation salon</span>
+            <span class="todo-item">Solutions spécialisées afro</span>
+            <span class="todo-item">Tableau comparatif</span>
+            <span class="todo-item">Avantages différenciateurs</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -2076,209 +1976,24 @@ body {
       </div>
     </div>
 
-    <!-- 5.2 Roadmap produit -->
+    <!-- 5.2 Prochaines étapes -->
     <div id="s5-2">
       <div class="sub-section-header">
         <span class="sub-section-num">5.2</span>
-        <span class="sub-section-title">Roadmap produit — 33 features · 4 phases</span>
+        <span class="sub-section-title">Prochaines étapes</span>
       </div>
-
-      <!-- Légende segments -->
-      <div style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:32px;">
-        <span style="font-size:0.75rem; padding:5px 12px; background:#ede8f8; color:#6b4fa6; border:1px solid #6b4fa644;">Utilisatrices</span>
-        <span style="font-size:0.75rem; padding:5px 12px; background:#e8f5ee; color:#2d7a5f; border:1px solid #2d7a5f44;">Salons</span>
-        <span style="font-size:0.75rem; padding:5px 12px; background:#e8f0f8; color:#1a5c8a; border:1px solid #1a5c8a44;">B2B / API</span>
-        <span style="font-size:0.75rem; padding:5px 12px; background:#f5ece0; color:#b07d3a; border:1px solid #b07d3a44;">Affiliation</span>
-      </div>
-
-      <!-- PHASE 1 — MVP -->
-      <div style="display:flex; align-items:center; gap:14px; margin-bottom:20px; padding-bottom:10px; border-bottom:2px solid #2d7a5f;">
-        <span style="font-size:0.72rem; font-weight:400; letter-spacing:0.12em; text-transform:uppercase; padding:5px 12px; background:#eef8f3; color:#2d7a5f; border:1px solid #2d7a5f44;">Phase 1 · MVP</span>
-        <span style="font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:300; color:var(--noir);">La simulation — le cœur du produit</span>
-        <span style="font-size:0.82rem; color:var(--taupe); margin-left:auto;">En construction</span>
-      </div>
-
-      <div class="grid-3" style="margin-bottom:40px;">
-        <div class="card"><div class="card-accent" style="background:#6b4fa6;"></div>
-          <span class="card-icon">📸</span>
-          <div class="card-title">Upload de photo</div>
-          <p class="card-desc">L'utilisatrice uploade son selfie ou choisit une photo depuis sa galerie. Prévisualisation instantanée.</p>
-        </div>
-        <div class="card"><div class="card-accent" style="background:#6b4fa6;"></div>
-          <span class="card-icon">✂️</span>
-          <div class="card-title">Choix du style — portfolio coiffeuse</div>
-          <p class="card-desc">Choix parmi les vraies réalisations de la coiffeuse. Elle simule exactement ce que la pro sait faire.</p>
-        </div>
-        <div class="card"><div class="card-accent" style="background:#6b4fa6;"></div>
-          <span class="card-icon">🤖</span>
-          <div class="card-title">Simulation IA — Fal.ai Flux.1</div>
-          <p class="card-desc">Génération IA image-to-image optimisée pour les cheveux texturés. Prompt engineering spécifique afro.</p>
-        </div>
-        <div class="card"><div class="card-accent" style="background:#6b4fa6;"></div>
-          <span class="card-icon">🖼️</span>
-          <div class="card-title">Résultat avant / après</div>
-          <p class="card-desc">Affichage côte à côte de la photo originale et du résultat simulé. Export et partage.</p>
-        </div>
-        <div class="card"><div class="card-accent" style="background:#2d7a5f;"></div>
-          <span class="card-icon">👤</span>
-          <div class="card-title">Fiche coiffeuse</div>
-          <p class="card-desc">Profil de la coiffeuse : photo, salon, spécialités, note, tarifs. Données hardcodées au MVP.</p>
-        </div>
-        <div class="card"><div class="card-accent" style="background:#2d7a5f;"></div>
-          <span class="card-icon">🗂️</span>
-          <div class="card-title">Portfolio de la coiffeuse</div>
-          <p class="card-desc">Galerie des réalisations. Ces photos alimentent les choix de style disponibles dans la simulation.</p>
-        </div>
-      </div>
-
-      <!-- PHASE 2 — Bientôt -->
-      <div style="display:flex; align-items:center; gap:14px; margin-bottom:20px; padding-bottom:10px; border-bottom:2px solid #5b6fa6;">
-        <span style="font-size:0.72rem; font-weight:400; letter-spacing:0.12em; text-transform:uppercase; padding:5px 12px; background:#eef0f8; color:#5b6fa6; border:1px solid #5b6fa644;">Phase 2 · Bientôt</span>
-        <span style="font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:300; color:var(--noir);">L'écosystème — annuaire, routine, communauté</span>
-        <span style="font-size:0.82rem; color:var(--taupe); margin-left:auto;">3–6 mois post-MVP</span>
-      </div>
-
-      <div class="grid-3" style="margin-bottom:40px;">
-        <div class="card"><div class="card-accent" style="background:#6b4fa6;"></div>
-          <span class="card-icon">🔓</span>
-          <div class="card-title">Compte utilisatrice</div>
-          <p class="card-desc">Inscription, connexion, profil. Sauvegarde des simulations et historique.</p>
-        </div>
-        <div class="card"><div class="card-accent" style="background:#6b4fa6;"></div>
-          <span class="card-icon">💳</span>
-          <div class="card-title">Abonnement Plan Crown</div>
-          <p class="card-desc">Freemium → Plan Crown (4,99€/mois). Stripe + gestion quotas + webhooks.</p>
-        </div>
-        <div class="card"><div class="card-accent" style="background:#6b4fa6;"></div>
-          <span class="card-icon">📚</span>
-          <div class="card-title">Bibliothèque de looks</div>
-          <p class="card-desc">Sauvegarde et organisation des simulations favorites. Partage en un clic.</p>
-        </div>
-        <div class="card"><div class="card-accent" style="background:#6b4fa6;"></div>
-          <span class="card-icon">✂️</span>
-          <div class="card-title">Longueur & couleur</div>
-          <p class="card-desc">Ajustement post-simulation. Fonctionnalité réservée au Plan Crown.</p>
-        </div>
-        <div class="card"><div class="card-accent" style="background:#6b4fa6;"></div>
-          <span class="card-icon">🧶</span>
-          <div class="card-title">Demande de mèches</div>
-          <p class="card-desc">Demander à la coiffeuse de préparer les mèches avant le RDV. Plan Crown.</p>
-        </div>
-        <div class="card"><div class="card-accent" style="background:#2d7a5f;"></div>
-          <span class="card-icon">🗺️</span>
-          <div class="card-title">Annuaire géolocalisé</div>
-          <p class="card-desc">Toutes les coiffeuses afro autour de l'utilisatrice. Filtres par style, tarif, disponibilité.</p>
-        </div>
-        <div class="card"><div class="card-accent" style="background:#2d7a5f;"></div>
-          <span class="card-icon">⭐</span>
-          <div class="card-title">Avis & notation</div>
-          <p class="card-desc">Avis vérifiés après chaque rendez-vous. Badge « Certifié afro ».</p>
-        </div>
-        <div class="card"><div class="card-accent" style="background:#2d7a5f;"></div>
-          <span class="card-icon">📂</span>
-          <div class="card-title">Offre Pro Salon</div>
-          <p class="card-desc">Essentiel (30€/mois) : portfolio, calendrier. Pro + IA (40€/mois) : catalogue auto-généré, stats, messagerie.</p>
-        </div>
-        <div class="card"><div class="card-accent" style="background:#2d7a5f;"></div>
-          <span class="card-icon">📅</span>
-          <div class="card-title">Calendrier & prise de RDV</div>
-          <p class="card-desc">Réservation intégrée. La simulation est jointe au RDV. Zéro malentendu.</p>
-        </div>
-        <div class="card"><div class="card-accent" style="background:#6b4fa6;"></div>
-          <span class="card-icon">🧴</span>
-          <div class="card-title">Routine capillaire</div>
-          <p class="card-desc">Routine adaptée au style et au type de cheveux. Produits propres en premier — sans pression.</p>
-        </div>
-        <div class="card"><div class="card-accent" style="background:#b07d3a;"></div>
-          <span class="card-icon">🛍️</span>
-          <div class="card-title">Affiliation produits</div>
-          <p class="card-desc">Suggestions discrètes de produits complémentaires. Commission 5–10%.</p>
-        </div>
-        <div class="card"><div class="card-accent" style="background:#2d7a5f;"></div>
-          <span class="card-icon">🤝</span>
-          <div class="card-title">Recommandation coiffeuse → coiffeuse</div>
-          <p class="card-desc">Système d'invitation. Seule une recommandation permet de rejoindre la plateforme.</p>
-        </div>
-      </div>
-
-      <!-- PHASE 3 — Futur -->
-      <div style="display:flex; align-items:center; gap:14px; margin-bottom:20px; padding-bottom:10px; border-bottom:2px solid #8b5e3c;">
-        <span style="font-size:0.72rem; font-weight:400; letter-spacing:0.12em; text-transform:uppercase; padding:5px 12px; background:#f8f0e8; color:#8b5e3c; border:1px solid #8b5e3c44;">Phase 3 · Futur</span>
-        <span style="font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:300; color:var(--noir);">B2B — API, widget, expansion USA</span>
-        <span style="font-size:0.82rem; color:var(--taupe); margin-left:auto;">An 2–5</span>
-      </div>
-
-      <div class="grid-3" style="margin-bottom:40px;">
-        <div class="card"><div class="card-accent" style="background:#1a5c8a;"></div>
-          <span class="card-icon">🔌</span>
-          <div class="card-title">API Crown On Me</div>
-          <p class="card-desc">API de simulation pour les entreprises. Intégration dans leurs propres apps et sites.</p>
-        </div>
-        <div class="card"><div class="card-accent" style="background:#1a5c8a;"></div>
-          <span class="card-icon">🪟</span>
-          <div class="card-title">Widget / iFrame</div>
-          <p class="card-desc">Module clé-en-main à intégrer en 1 ligne de code. White-label disponible.</p>
-        </div>
-        <div class="card"><div class="card-accent" style="background:#1a5c8a;"></div>
-          <span class="card-icon">🏢</span>
-          <div class="card-title">Plan Entreprise</div>
-          <p class="card-desc">Offre sur mesure grandes marques (L'Oréal, SheaMoisture…). Dashboard, SLA, support. 499€+/mois.</p>
-        </div>
-        <div class="card"><div class="card-accent" style="background:#6b4fa6;"></div>
-          <span class="card-icon">🇺🇸</span>
-          <div class="card-title">Expansion États-Unis</div>
-          <p class="card-desc">43M d'Afro-Américains, marché Black Hair Care le plus mature au monde. Anglais, Stripe US, salons locaux.</p>
-        </div>
-        <div class="card"><div class="card-accent" style="background:#b07d3a;"></div>
-          <span class="card-icon">🤝</span>
-          <div class="card-title">Partenariats marques</div>
-          <p class="card-desc">Intégration marques afro (SheaMoisture, Cantu, Mizani). Co-branding et affiliation avancée.</p>
-        </div>
-        <div class="card"><div class="card-accent" style="background:#2d7a5f;"></div>
-          <span class="card-icon">🎓</span>
-          <div class="card-title">Formation coiffeuses</div>
-          <p class="card-desc">Module de formation en ligne : techniques, tendances, gestion du salon.</p>
-        </div>
-      </div>
-
-      <!-- PHASE 4 — Expansion globale -->
-      <div style="display:flex; align-items:center; gap:14px; margin-bottom:20px; padding-bottom:10px; border-bottom:2px solid #8b3a6e;">
-        <span style="font-size:0.72rem; font-weight:400; letter-spacing:0.12em; text-transform:uppercase; padding:5px 12px; background:#f8e8f2; color:#8b3a6e; border:1px solid #8b3a6e44;">Phase 4 · Expansion globale</span>
-        <span style="font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:300; color:var(--noir);">Afrique — le marché naturel de Crown On Me</span>
-        <span style="font-size:0.82rem; color:var(--taupe); margin-left:auto;">An 5+</span>
-      </div>
-
-      <div class="grid-3" style="margin-bottom:32px;">
-        <div class="card"><div class="card-accent" style="background:#8b3a6e;"></div>
-          <span class="card-icon">🌍</span>
-          <div class="card-title">Afrique francophone</div>
-          <p class="card-desc">Côte d'Ivoire, Sénégal, Cameroun, RDC. Adaptation prix, monnaies locales (CFA), salons partenaires.</p>
-        </div>
-        <div class="card"><div class="card-accent" style="background:#8b3a6e;"></div>
-          <span class="card-icon">🇳🇬</span>
-          <div class="card-title">Afrique anglophone</div>
-          <p class="card-desc">Nigeria, Ghana, Kenya. Lagos et Nairobi : hubs startup avec forte culture beauté afro.</p>
-        </div>
-        <div class="card"><div class="card-accent" style="background:#8b3a6e;"></div>
-          <span class="card-icon">📱</span>
-          <div class="card-title">Version lite — faible connectivité</div>
-          <p class="card-desc">Version allégée pour connexions lentes et appareils d'entrée de gamme. PWA + simulation basse résolution.</p>
-        </div>
-      </div>
-
-      <!-- Stats résumé -->
-      <div class="dark-band">
-        <div class="dark-stat">
-          <span class="ds-num" style="color:#2d7a5f;">6</span>
-          <span class="ds-label">Features MVP</span>
-        </div>
-        <div class="dark-stat">
-          <span class="ds-num" style="color:#5b6fa6;">17</span>
-          <span class="ds-label">Features Phase 2</span>
-        </div>
-        <div class="dark-stat">
-          <span class="ds-num" style="color:#8b5e3c;">7 + 3</span>
-          <span class="ds-label">Features Phase 3 & 4</span>
+      <div class="todo-block">
+        <div class="todo-inner">
+          <span class="todo-badge">À compléter</span>
+          <p class="todo-title">Jalons à venir</p>
+          <p class="todo-desc">Les prochaines étapes de validation et de lancement.</p>
+          <div class="todo-items">
+            <span class="todo-item">MVP fonctionnel</span>
+            <span class="todo-item">Premier contrat B2B salon signé</span>
+            <span class="todo-item">Tests utilisateurs</span>
+            <span class="todo-item">Lancement bêta</span>
+            <span class="todo-item">Recrutement ML Engineer + UX</span>
+          </div>
         </div>
       </div>
     </div>
@@ -2287,229 +2002,41 @@ body {
     <div id="s5-3">
       <div class="sub-section-header">
         <span class="sub-section-num">5.3</span>
-        <span class="sub-section-title">Projections financières · 2026–2030</span>
+        <span class="sub-section-title">Projections</span>
       </div>
 
-      <!-- Repères clés -->
-      <div class="stat-row" style="margin-bottom:32px;">
-        <div class="stat-block">
-          <span class="stat-num" style="color:var(--amber);">Sept. 26</span>
-          <span class="stat-label">EBITDA positif</span>
-          <p class="stat-desc">Rentabilité opérationnelle atteinte dès le troisième mois d'activité.</p>
-        </div>
-        <div class="stat-block">
-          <span class="stat-num" style="color:var(--amber);">1 021</span>
-          <span class="stat-label">Coiffeurs onboardés (T4 2030)</span>
-          <p class="stat-desc">Croissance organique de 6%/mois sur la base des ~200 salons spécialisés en France.</p>
-        </div>
-        <div class="stat-block">
-          <span class="stat-num" style="color:var(--amber);">207K</span>
-          <span class="stat-label">Coiffées actives (T4 2030)</span>
-          <p class="stat-desc">Sur un marché adressable de ~550 000 personnes en France.</p>
-        </div>
-      </div>
-
-      <!-- Phases -->
-      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--rule); border:1px solid var(--rule); margin-bottom:32px;">
-        <div style="background:var(--white); padding:18px 22px;">
-          <p style="font-size:0.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--amber); margin-bottom:4px;">Phase 1 · Lancement</p>
-          <p style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:var(--noir);">Juil. 2026 → Janv. 2027</p>
-          <p style="font-size:0.82rem; color:var(--taupe);">Données au mois</p>
-        </div>
-        <div style="background:var(--white); padding:18px 22px;">
-          <p style="font-size:0.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--amber); margin-bottom:4px;">Phase 2 · Accélération</p>
-          <p style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:var(--noir);">Févr. 2027 → Janv. 2028</p>
-          <p style="font-size:0.82rem; color:var(--taupe);">Données au trimestre</p>
-        </div>
-        <div style="background:var(--white); padding:18px 22px;">
-          <p style="font-size:0.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--amber); margin-bottom:4px;">Phase 3 · Maturité</p>
-          <p style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:var(--noir);">Févr. 2028 → Déc. 2030</p>
-          <p style="font-size:0.82rem; color:var(--taupe);">Données au trimestre</p>
-        </div>
-      </div>
-
-
-      <!-- Courbes volume -->
-      <div class="section-divider">
-        <div class="section-divider-line"></div>
-        <span class="section-divider-label">Volume · Courbes de croissance</span>
-        <div class="section-divider-line"></div>
-      </div>
-
-      <div class="chart-block">
-        <div class="chart-block-label">
-          <span><span class="chart-dot" style="background:var(--noir)"></span>Coiffeurs onboardés</span>
-          <span class="chart-tag">cumul · fin de période</span>
-        </div>
-        <div class="chart-wrap">
-          <svg viewBox="0 0 880 300" class="chart" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"><rect x="66.0" y="26" width="216.0" height="232" fill="#e8ddc9" opacity="0.5"/><line x1="66" y1="258.0" x2="858" y2="258.0" stroke="#ddd0b8" stroke-width="1"/><text x="56" y="261.0" class="ytick" text-anchor="end">0</text><line x1="66" y1="202.8" x2="858" y2="202.8" stroke="#ddd0b8" stroke-width="1"/><text x="56" y="205.8" class="ytick" text-anchor="end">250</text><line x1="66" y1="147.5" x2="858" y2="147.5" stroke="#ddd0b8" stroke-width="1"/><text x="56" y="150.5" class="ytick" text-anchor="end">500</text><line x1="66" y1="92.3" x2="858" y2="92.3" stroke="#ddd0b8" stroke-width="1"/><text x="56" y="95.3" class="ytick" text-anchor="end">750</text><line x1="66" y1="37.0" x2="858" y2="37.0" stroke="#ddd0b8" stroke-width="1"/><text x="56" y="40.0" class="ytick" text-anchor="end">1 000</text><line x1="282.0" y1="26" x2="282.0" y2="258" stroke="var(--taupe)" stroke-width="1" stroke-dasharray="3 3"/><text x="174.0" y="284" class="xzone" text-anchor="middle">Mensuel</text><text x="570.0" y="284" class="xzone" text-anchor="middle">Trimestriel</text><text x="66.0" y="272" class="xtick" text-anchor="middle">Juil. 26</text><text x="282.0" y="272" class="xtick" text-anchor="middle">Janv. 27</text><text x="426.0" y="272" class="xtick" text-anchor="middle">T4 27</text><text x="570.0" y="272" class="xtick" text-anchor="middle">T4 28</text><text x="714.0" y="272" class="xtick" text-anchor="middle">T4 29</text><text x="858.0" y="272" class="xtick" text-anchor="middle">T4 30</text><path d="M 66.0 258.0 L 66.0 258.0 L 102.0 254.2 L 138.0 250.5 L 174.0 246.7 L 210.0 243.0 L 246.0 239.2 L 282.0 235.5 L 318.0 228.0 L 354.0 214.0 L 390.0 198.8 L 426.0 187.5 L 462.0 176.2 L 498.0 162.3 L 534.0 147.1 L 570.0 135.8 L 606.0 124.5 L 642.0 110.6 L 678.0 95.4 L 714.0 84.1 L 750.0 72.8 L 786.0 58.9 L 822.0 43.7 L 858.0 32.4 L 858.0 258.0 Z" fill="var(--noir)" opacity="0.07"/><path d="M 66.0 258.0 L 102.0 254.2 L 138.0 250.5 L 174.0 246.7 L 210.0 243.0 L 246.0 239.2 L 282.0 235.5 L 318.0 228.0 L 354.0 214.0 L 390.0 198.8 L 426.0 187.5 L 462.0 176.2 L 498.0 162.3 L 534.0 147.1 L 570.0 135.8 L 606.0 124.5 L 642.0 110.6 L 678.0 95.4 L 714.0 84.1 L 750.0 72.8 L 786.0 58.9 L 822.0 43.7 L 858.0 32.4" fill="none" stroke="var(--noir)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="66.0" cy="258.0" r="3" fill="var(--ivoire)" stroke="var(--noir)" stroke-width="1.5" class="dot" data-l="Juil. 2026" data-v="0"/><circle cx="102.0" cy="254.2" r="3" fill="var(--ivoire)" stroke="var(--noir)" stroke-width="1.5" class="dot" data-l="Août 2026" data-v="17"/><circle cx="138.0" cy="250.5" r="3" fill="var(--ivoire)" stroke="var(--noir)" stroke-width="1.5" class="dot" data-l="Sept. 2026" data-v="34"/><circle cx="174.0" cy="246.7" r="3" fill="var(--ivoire)" stroke="var(--noir)" stroke-width="1.5" class="dot" data-l="Oct. 2026" data-v="51"/><circle cx="210.0" cy="243.0" r="3" fill="var(--ivoire)" stroke="var(--noir)" stroke-width="1.5" class="dot" data-l="Nov. 2026" data-v="68"/><circle cx="246.0" cy="239.2" r="3" fill="var(--ivoire)" stroke="var(--noir)" stroke-width="1.5" class="dot" data-l="Déc. 2026" data-v="85"/><circle cx="282.0" cy="235.5" r="3" fill="var(--ivoire)" stroke="var(--noir)" stroke-width="1.5" class="dot" data-l="Janv. 2027" data-v="102"/><circle cx="318.0" cy="228.0" r="3" fill="var(--ivoire)" stroke="var(--noir)" stroke-width="1.5" class="dot" data-l="T1 2027" data-v="136"/><circle cx="354.0" cy="214.0" r="3" fill="var(--ivoire)" stroke="var(--noir)" stroke-width="1.5" class="dot" data-l="T2 2027" data-v="199"/><circle cx="390.0" cy="198.8" r="3" fill="var(--ivoire)" stroke="var(--noir)" stroke-width="1.5" class="dot" data-l="T3 2027" data-v="268"/><circle cx="426.0" cy="187.5" r="3" fill="var(--ivoire)" stroke="var(--noir)" stroke-width="1.5" class="dot" data-l="T4 2027" data-v="319"/><circle cx="462.0" cy="176.2" r="3" fill="var(--ivoire)" stroke="var(--noir)" stroke-width="1.5" class="dot" data-l="T1 2028" data-v="370"/><circle cx="498.0" cy="162.3" r="3" fill="var(--ivoire)" stroke="var(--noir)" stroke-width="1.5" class="dot" data-l="T2 2028" data-v="433"/><circle cx="534.0" cy="147.1" r="3" fill="var(--ivoire)" stroke="var(--noir)" stroke-width="1.5" class="dot" data-l="T3 2028" data-v="502"/><circle cx="570.0" cy="135.8" r="3" fill="var(--ivoire)" stroke="var(--noir)" stroke-width="1.5" class="dot" data-l="T4 2028" data-v="553"/><circle cx="606.0" cy="124.5" r="3" fill="var(--ivoire)" stroke="var(--noir)" stroke-width="1.5" class="dot" data-l="T1 2029" data-v="604"/><circle cx="642.0" cy="110.6" r="3" fill="var(--ivoire)" stroke="var(--noir)" stroke-width="1.5" class="dot" data-l="T2 2029" data-v="667"/><circle cx="678.0" cy="95.4" r="3" fill="var(--ivoire)" stroke="var(--noir)" stroke-width="1.5" class="dot" data-l="T3 2029" data-v="736"/><circle cx="714.0" cy="84.1" r="3" fill="var(--ivoire)" stroke="var(--noir)" stroke-width="1.5" class="dot" data-l="T4 2029" data-v="787"/><circle cx="750.0" cy="72.8" r="3" fill="var(--ivoire)" stroke="var(--noir)" stroke-width="1.5" class="dot" data-l="T1 2030" data-v="838"/><circle cx="786.0" cy="58.9" r="3" fill="var(--ivoire)" stroke="var(--noir)" stroke-width="1.5" class="dot" data-l="T2 2030" data-v="901"/><circle cx="822.0" cy="43.7" r="3" fill="var(--ivoire)" stroke="var(--noir)" stroke-width="1.5" class="dot" data-l="T3 2030" data-v="970"/><circle cx="858.0" cy="32.4" r="3" fill="var(--ivoire)" stroke="var(--noir)" stroke-width="1.5" class="dot" data-l="T4 2030" data-v="1 021"/><text x="852.0" y="22.4" class="endlab" fill="var(--noir)" text-anchor="end">1 021</text></svg>
-        </div>
-      </div>
-
-      <div class="chart-block">
-        <div class="chart-block-label">
-          <span><span class="chart-dot" style="background:var(--amber)"></span>Coiffées actives</span>
-          <span class="chart-tag">cumul · fin de période</span>
-        </div>
-        <div class="chart-wrap">
-          <svg viewBox="0 0 880 300" class="chart" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"><rect x="66.0" y="26" width="216.0" height="232" fill="#e8ddc9" opacity="0.5"/><line x1="66" y1="258.0" x2="858" y2="258.0" stroke="#ddd0b8" stroke-width="1"/><text x="56" y="261.0" class="ytick" text-anchor="end">0</text><line x1="66" y1="205.3" x2="858" y2="205.3" stroke="#ddd0b8" stroke-width="1"/><text x="56" y="208.3" class="ytick" text-anchor="end">50 000</text><line x1="66" y1="152.5" x2="858" y2="152.5" stroke="#ddd0b8" stroke-width="1"/><text x="56" y="155.5" class="ytick" text-anchor="end">100 000</text><line x1="66" y1="99.8" x2="858" y2="99.8" stroke="#ddd0b8" stroke-width="1"/><text x="56" y="102.8" class="ytick" text-anchor="end">150 000</text><line x1="66" y1="47.1" x2="858" y2="47.1" stroke="#ddd0b8" stroke-width="1"/><text x="56" y="50.1" class="ytick" text-anchor="end">200 000</text><line x1="282.0" y1="26" x2="282.0" y2="258" stroke="var(--taupe)" stroke-width="1" stroke-dasharray="3 3"/><text x="174.0" y="284" class="xzone" text-anchor="middle">Mensuel</text><text x="570.0" y="284" class="xzone" text-anchor="middle">Trimestriel</text><text x="66.0" y="272" class="xtick" text-anchor="middle">Juil. 26</text><text x="282.0" y="272" class="xtick" text-anchor="middle">Janv. 27</text><text x="426.0" y="272" class="xtick" text-anchor="middle">T4 27</text><text x="570.0" y="272" class="xtick" text-anchor="middle">T4 28</text><text x="714.0" y="272" class="xtick" text-anchor="middle">T4 29</text><text x="858.0" y="272" class="xtick" text-anchor="middle">T4 30</text><path d="M 66.0 258.0 L 66.0 258.0 L 102.0 256.4 L 138.0 254.8 L 174.0 253.6 L 210.0 252.4 L 246.0 251.4 L 282.0 250.3 L 318.0 247.5 L 354.0 240.3 L 390.0 228.3 L 426.0 215.3 L 462.0 202.3 L 498.0 188.1 L 534.0 171.0 L 570.0 152.0 L 606.0 133.0 L 642.0 112.2 L 678.0 94.0 L 714.0 84.3 L 750.0 74.1 L 786.0 63.2 L 822.0 51.6 L 858.0 39.3 L 858.0 258.0 Z" fill="var(--amber)" opacity="0.07"/><path d="M 66.0 258.0 L 102.0 256.4 L 138.0 254.8 L 174.0 253.6 L 210.0 252.4 L 246.0 251.4 L 282.0 250.3 L 318.0 247.5 L 354.0 240.3 L 390.0 228.3 L 426.0 215.3 L 462.0 202.3 L 498.0 188.1 L 534.0 171.0 L 570.0 152.0 L 606.0 133.0 L 642.0 112.2 L 678.0 94.0 L 714.0 84.3 L 750.0 74.1 L 786.0 63.2 L 822.0 51.6 L 858.0 39.3" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="66.0" cy="258.0" r="3" fill="var(--ivoire)" stroke="var(--amber)" stroke-width="1.5" class="dot" data-l="Juil. 2026" data-v="0"/><circle cx="102.0" cy="256.4" r="3" fill="var(--ivoire)" stroke="var(--amber)" stroke-width="1.5" class="dot" data-l="Août 2026" data-v="1 500"/><circle cx="138.0" cy="254.8" r="3" fill="var(--ivoire)" stroke="var(--amber)" stroke-width="1.5" class="dot" data-l="Sept. 2026" data-v="3 000"/><circle cx="174.0" cy="253.6" r="3" fill="var(--ivoire)" stroke="var(--amber)" stroke-width="1.5" class="dot" data-l="Oct. 2026" data-v="4 200"/><circle cx="210.0" cy="252.4" r="3" fill="var(--ivoire)" stroke="var(--amber)" stroke-width="1.5" class="dot" data-l="Nov. 2026" data-v="5 300"/><circle cx="246.0" cy="251.4" r="3" fill="var(--ivoire)" stroke="var(--amber)" stroke-width="1.5" class="dot" data-l="Déc. 2026" data-v="6 300"/><circle cx="282.0" cy="250.3" r="3" fill="var(--ivoire)" stroke="var(--amber)" stroke-width="1.5" class="dot" data-l="Janv. 2027" data-v="7 300"/><circle cx="318.0" cy="247.5" r="3" fill="var(--ivoire)" stroke="var(--amber)" stroke-width="1.5" class="dot" data-l="T1 2027" data-v="10 000"/><circle cx="354.0" cy="240.3" r="3" fill="var(--ivoire)" stroke="var(--amber)" stroke-width="1.5" class="dot" data-l="T2 2027" data-v="16 800"/><circle cx="390.0" cy="228.3" r="3" fill="var(--ivoire)" stroke="var(--amber)" stroke-width="1.5" class="dot" data-l="T3 2027" data-v="28 200"/><circle cx="426.0" cy="215.3" r="3" fill="var(--ivoire)" stroke="var(--amber)" stroke-width="1.5" class="dot" data-l="T4 2027" data-v="40 500"/><circle cx="462.0" cy="202.3" r="3" fill="var(--ivoire)" stroke="var(--amber)" stroke-width="1.5" class="dot" data-l="T1 2028" data-v="52 800"/><circle cx="498.0" cy="188.1" r="3" fill="var(--ivoire)" stroke="var(--amber)" stroke-width="1.5" class="dot" data-l="T2 2028" data-v="66 300"/><circle cx="534.0" cy="171.0" r="3" fill="var(--ivoire)" stroke="var(--amber)" stroke-width="1.5" class="dot" data-l="T3 2028" data-v="82 500"/><circle cx="570.0" cy="152.0" r="3" fill="var(--ivoire)" stroke="var(--amber)" stroke-width="1.5" class="dot" data-l="T4 2028" data-v="100 500"/><circle cx="606.0" cy="133.0" r="3" fill="var(--ivoire)" stroke="var(--amber)" stroke-width="1.5" class="dot" data-l="T1 2029" data-v="118 500"/><circle cx="642.0" cy="112.2" r="3" fill="var(--ivoire)" stroke="var(--amber)" stroke-width="1.5" class="dot" data-l="T2 2029" data-v="138 300"/><circle cx="678.0" cy="94.0" r="3" fill="var(--ivoire)" stroke="var(--amber)" stroke-width="1.5" class="dot" data-l="T3 2029" data-v="155 500"/><circle cx="714.0" cy="84.3" r="3" fill="var(--ivoire)" stroke="var(--amber)" stroke-width="1.5" class="dot" data-l="T4 2029" data-v="164 681"/><circle cx="750.0" cy="74.1" r="3" fill="var(--ivoire)" stroke="var(--amber)" stroke-width="1.5" class="dot" data-l="T1 2030" data-v="174 424"/><circle cx="786.0" cy="63.2" r="3" fill="var(--ivoire)" stroke="var(--amber)" stroke-width="1.5" class="dot" data-l="T2 2030" data-v="184 764"/><circle cx="822.0" cy="51.6" r="3" fill="var(--ivoire)" stroke="var(--amber)" stroke-width="1.5" class="dot" data-l="T3 2030" data-v="195 736"/><circle cx="858.0" cy="39.3" r="3" fill="var(--ivoire)" stroke="var(--amber)" stroke-width="1.5" class="dot" data-l="T4 2030" data-v="207 380"/><text x="852.0" y="29.3" class="endlab" fill="var(--amber)" text-anchor="end">207 380</text></svg>
-        </div>
-      </div>
-
-      <!-- Tableau lancement mensuel -->
-      <div class="section-divider">
-        <div class="section-divider-line"></div>
-        <span class="section-divider-label">Phase de lancement · mensuel</span>
-        <div class="section-divider-line"></div>
-      </div>
-
-      <div style="overflow-x:auto; margin-bottom:32px;">
-        <table style="width:100%; border-collapse:collapse; background:var(--white); border:1px solid var(--rule); font-size:0.88rem;">
-          <thead>
-            <tr style="border-bottom:2px solid var(--amber);">
-              <th style="padding:14px 20px; text-align:left; font-size:0.72rem; font-weight:400; letter-spacing:.12em; text-transform:uppercase; color:var(--taupe);">Période</th>
-              <th style="padding:14px 20px; text-align:right; font-size:0.72rem; font-weight:400; letter-spacing:.12em; text-transform:uppercase; color:var(--taupe);">Revenus</th>
-              <th style="padding:14px 20px; text-align:right; font-size:0.72rem; font-weight:400; letter-spacing:.12em; text-transform:uppercase; color:var(--taupe);">Marge brute</th>
-              <th style="padding:14px 20px; text-align:right; font-size:0.72rem; font-weight:400; letter-spacing:.12em; text-transform:uppercase; color:var(--taupe);">EBITDA</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr style="border-bottom:1px solid var(--rule);">
-              <td style="padding:12px 20px; font-weight:400;">Juil. 2026</td>
-              <td style="padding:12px 20px; text-align:right; color:var(--taupe);">0 €</td>
-              <td style="padding:12px 20px; text-align:right; color:#a14b2e;">(2 220 €)</td>
-              <td style="padding:12px 20px; text-align:right; color:#a14b2e;">(15 600 €)</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--rule);">
-              <td style="padding:12px 20px; font-weight:400;">Août 2026</td>
-              <td style="padding:12px 20px; text-align:right;">8 080 €</td>
-              <td style="padding:12px 20px; text-align:right;">5 688 €</td>
-              <td style="padding:12px 20px; text-align:right; color:#a14b2e;">(7 192 €)</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--rule); background:#fdf8f0;">
-              <td style="padding:12px 20px; font-weight:400; color:var(--amber);">Sept. 2026 ← EBITDA +</td>
-              <td style="padding:12px 20px; text-align:right;">16 160 €</td>
-              <td style="padding:12px 20px; text-align:right;">13 766 €</td>
-              <td style="padding:12px 20px; text-align:right; color:var(--amber); font-weight:400;">886 €</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--rule);">
-              <td style="padding:12px 20px; font-weight:400;">Oct. 2026</td>
-              <td style="padding:12px 20px; text-align:right;">22 743 €</td>
-              <td style="padding:12px 20px; text-align:right;">20 383 €</td>
-              <td style="padding:12px 20px; text-align:right;">7 503 €</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--rule);">
-              <td style="padding:12px 20px; font-weight:400;">Nov. 2026</td>
-              <td style="padding:12px 20px; text-align:right;">28 827 €</td>
-              <td style="padding:12px 20px; text-align:right;">26 478 €</td>
-              <td style="padding:12px 20px; text-align:right;">13 598 €</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--rule);">
-              <td style="padding:12px 20px; font-weight:400;">Déc. 2026</td>
-              <td style="padding:12px 20px; text-align:right;">34 412 €</td>
-              <td style="padding:12px 20px; text-align:right;">32 073 €</td>
-              <td style="padding:12px 20px; text-align:right;">19 193 €</td>
-            </tr>
-            <tr>
-              <td style="padding:12px 20px; font-weight:400;">Janv. 2027</td>
-              <td style="padding:12px 20px; text-align:right;">39 997 €</td>
-              <td style="padding:12px 20px; text-align:right;">37 657 €</td>
-              <td style="padding:12px 20px; text-align:right;">24 777 €</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Tableau trimestriel -->
-      <div class="section-divider">
-        <div class="section-divider-line"></div>
-        <span class="section-divider-label">Accélération & maturité · trimestriel</span>
-        <div class="section-divider-line"></div>
-      </div>
-
-      <div style="overflow-x:auto; margin-bottom:32px;">
-        <table style="width:100%; border-collapse:collapse; background:var(--white); border:1px solid var(--rule); font-size:0.88rem;">
-          <thead>
-            <tr style="border-bottom:2px solid var(--amber);">
-              <th style="padding:14px 20px; text-align:left; font-size:0.72rem; font-weight:400; letter-spacing:.12em; text-transform:uppercase; color:var(--taupe);">Trimestre</th>
-              <th style="padding:14px 20px; text-align:right; font-size:0.72rem; font-weight:400; letter-spacing:.12em; text-transform:uppercase; color:var(--taupe);">Revenus</th>
-              <th style="padding:14px 20px; text-align:right; font-size:0.72rem; font-weight:400; letter-spacing:.12em; text-transform:uppercase; color:var(--taupe);">Marge brute</th>
-              <th style="padding:14px 20px; text-align:right; font-size:0.72rem; font-weight:400; letter-spacing:.12em; text-transform:uppercase; color:var(--taupe);">EBITDA</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr style="border-bottom:1px solid var(--rule);">
-              <td style="padding:11px 20px; font-weight:400;">T1 2027 <span style="font-size:0.65rem;color:var(--taupe);background:var(--rule);padding:1px 6px;margin-left:6px;">partiel</span></td>
-              <td style="padding:11px 20px; text-align:right;">101 240 €</td>
-              <td style="padding:11px 20px; text-align:right;">96 476 €</td>
-              <td style="padding:11px 20px; text-align:right;">68 236 €</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--rule);">
-              <td style="padding:11px 20px; font-weight:400;">T2 2027</td>
-              <td style="padding:11px 20px; text-align:right;">229 557 €</td>
-              <td style="padding:11px 20px; text-align:right;">222 088 €</td>
-              <td style="padding:11px 20px; text-align:right;">179 728 €</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--rule);">
-              <td style="padding:11px 20px; font-weight:400;">T4 2027</td>
-              <td style="padding:11px 20px; text-align:right;">576 618 €</td>
-              <td style="padding:11px 20px; text-align:right;">568 498 €</td>
-              <td style="padding:11px 20px; text-align:right;">515 264 €</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--rule);">
-              <td style="padding:11px 20px; font-weight:400;">T4 2028</td>
-              <td style="padding:11px 20px; text-align:right;">1 470 945 €</td>
-              <td style="padding:11px 20px; text-align:right;">1 462 134 €</td>
-              <td style="padding:11px 20px; text-align:right;">1 408 899 €</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--rule);">
-              <td style="padding:11px 20px; font-weight:400;">T4 2029</td>
-              <td style="padding:11px 20px; text-align:right;">2 499 709 €</td>
-              <td style="padding:11px 20px; text-align:right;">2 491 876 €</td>
-              <td style="padding:11px 20px; text-align:right;">2 438 641 €</td>
-            </tr>
-            <tr style="background:#fdf8f0;">
-              <td style="padding:11px 20px; font-weight:400; color:var(--amber);">T4 2030</td>
-              <td style="padding:11px 20px; text-align:right; font-weight:400; color:var(--amber);">3 151 032 €</td>
-              <td style="padding:11px 20px; text-align:right; font-weight:400; color:var(--amber);">3 142 880 €</td>
-              <td style="padding:11px 20px; text-align:right; font-weight:400; color:var(--amber);">3 089 645 €</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Résumé final -->
+      <!-- Résumé projections — données réelles -->
       <div class="dark-band" style="margin-bottom:24px;">
         <div class="dark-stat">
-          <span class="ds-num" style="color:var(--amber);">3,15M€</span>
-          <span class="ds-label">Revenus T4 2030 / trimestre</span>
+          <span class="ds-num" style="color:var(--amber);">24K€</span>
+          <span class="ds-label">ARR moyen an 1 · scénario moyen</span>
         </div>
         <div class="dark-stat">
-          <span class="ds-num" style="color:var(--amber);">3,09M€</span>
-          <span class="ds-label">EBITDA T4 2030 / trimestre</span>
+          <span class="ds-num" style="color:var(--amber);">230K€</span>
+          <span class="ds-label">ARR an 3 · scénario moyen</span>
         </div>
         <div class="dark-stat">
-          <span class="ds-num" style="color:var(--amber);">98%</span>
-          <span class="ds-label">Marge EBITDA à maturité</span>
+          <span class="ds-num" style="color:var(--amber);">~1M€</span>
+          <span class="ds-label">ARR an 5 · scénario moyen (tous segments)</span>
         </div>
       </div>
 
-      <!-- Hypothèses -->
-      <div class="card" style="border-left:4px solid var(--taupe); padding:24px 28px;">
-        <div class="card-accent" style="background:transparent;"></div>
-        <p style="font-size:0.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--taupe); margin-bottom:14px;">Hypothèses du modèle</p>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px 32px;">
-          <p style="font-size:0.88rem; color:var(--taupe); line-height:1.6;">— Marché coiffeurs cheveux texturés : ~200 (FR), croissance 6%/mois</p>
-          <p style="font-size:0.88rem; color:var(--taupe); line-height:1.6;">— Cible coiffées adressable : ~550 000 personnes</p>
-          <p style="font-size:0.88rem; color:var(--taupe); line-height:1.6;">— Abonnements coiffeurs : 30€ et 40€/mois</p>
-          <p style="font-size:0.88rem; color:var(--taupe); line-height:1.6;">— Abonnement coiffées : 4,99€/mois (découverte)</p>
-          <p style="font-size:0.88rem; color:var(--taupe); line-height:1.6;">— Saisonnalité : pic été, creux hiver</p>
-          <p style="font-size:0.88rem; color:var(--taupe); line-height:1.6;">— T1 2027 « partiel » = févr. + mars</p>
+      <div class="todo-block">
+        <div class="todo-inner">
+          <span class="todo-badge">À compléter</span>
+          <p class="todo-title">Tableau de projections détaillé</p>
+          <p class="todo-desc">Ajouter ici les projections complètes par segment, avec les hypothèses et les 3 scénarios.</p>
+          <div class="todo-items">
+            <span class="todo-item">Segment utilisatrices B2C</span>
+            <span class="todo-item">Segment salons B2B2C</span>
+            <span class="todo-item">Segment B2B API</span>
+            <span class="todo-item">Affiliation produits</span>
+          </div>
         </div>
       </div>
 
-      <p style="font-size:0.78rem; color:var(--taupe); margin-top:16px; font-style:italic;">
-        ⚠️ Projections internes issues du modèle Crown On Me (fichier CROWN_ON_ME.xlsx). Ce ne sont pas des données externes sourcées — elles reposent sur les hypothèses ci-dessus.
+      <p style="font-size:0.7rem; color:var(--taupe); margin-top:12px; font-style:italic;">
+        ⚠️ Les chiffres affichés ci-dessus sont des estimations basées sur des hypothèses de marché. Les projections complètes et sourcées sont disponibles dans le document « Projections de Conquête ».
       </p>
     </div>
   </section>
@@ -2521,95 +2048,64 @@ body {
   <section class="chapter ch6" id="ch6">
     <div class="chapter-eyebrow">06 — Financement</div>
     <h2 class="chapter-title">Nos besoins<br><em>& notre stratégie.</em></h2>
-    <p class="chapter-subtitle">Un besoin financier ciblé, une stratégie de financement réaliste.</p>
+    <p class="chapter-subtitle">Cette section sera complétée après les premières validations terrain.</p>
 
     <div id="s6-1">
       <div class="sub-section-header">
         <span class="sub-section-num">6.1</span>
         <span class="sub-section-title">Nos besoins</span>
       </div>
-
-      <div class="grid-2" style="margin-bottom:32px;">
-        <div>
-          <p style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-weight:300; color:var(--noir); line-height:1.3; margin-bottom:16px;">
-            Un besoin de <em style="font-style:italic;color:var(--amber);">23 000 €</em> pour passer du MVP au lancement commercial.
-          </p>
-          <p style="font-size:0.95rem; color:var(--taupe); line-height:1.8;">
-            Ce montant couvre les trois leviers nécessaires pour valider le marché et générer les premiers revenus : l'acquisition clients, le développement produit, et la mise en conformité.
-          </p>
-        </div>
-        <div class="card" style="border-left:4px solid var(--c6); padding:28px;">
-          <div class="card-accent" style="background:transparent;"></div>
-          <p style="font-size:0.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--c6); margin-bottom:16px;">Ce que nous cherchons aussi</p>
-          <div style="display:flex; gap:14px; align-items:flex-start;">
-            <span style="font-size:1.4rem;">🧭</span>
-            <div>
-              <p style="font-size:1rem; font-weight:400; color:var(--noir); margin-bottom:4px;">Mentorat pour scaler</p>
-              <p style="font-size:0.88rem; color:var(--taupe); line-height:1.65;">Accompagnement stratégique sur la montée en charge : structuration de l'équipe, expansion géographique, négociation partenariats B2B salons.</p>
-            </div>
+      <div class="todo-block">
+        <div class="todo-inner">
+          <span class="todo-badge">À compléter</span>
+          <p class="todo-title">Ce dont nous avons besoin</p>
+          <p class="todo-desc">Décrire les ressources humaines, techniques et financières nécessaires pour franchir les prochaines étapes.</p>
+          <div class="todo-items">
+            <span class="todo-item">ML / AI Engineer</span>
+            <span class="todo-item">UX / UI Designer</span>
+            <span class="todo-item">Infrastructure technique</span>
+            <span class="todo-item">Coûts IA (Fal.ai)</span>
           </div>
-        </div>
-      </div>
-
-      <div class="stat-row">
-        <div class="stat-block">
-          <span class="stat-num" style="color:var(--c6);">23K€</span>
-          <span class="stat-label">Besoin total</span>
-          <p class="stat-desc">Budget nécessaire pour financer le lancement commercial et les 6 premiers mois d'activité.</p>
-        </div>
-        <div class="stat-block">
-          <span class="stat-num" style="color:var(--c6);">3</span>
-          <span class="stat-label">Postes d'allocation</span>
-          <p class="stat-desc">Marketing / acquisition clients, développement technique, conformité RGPD + salaire commercial.</p>
-        </div>
-        <div class="stat-block">
-          <span class="stat-num" style="color:var(--c6);">M3</span>
-          <span class="stat-label">Premiers revenus attendus</span>
-          <p class="stat-desc">Objectif de premiers revenus récurrents dès le troisième mois après le lancement.</p>
-        </div>
-      </div>
-
-      <div class="grid-3" style="margin-top:24px;">
-        <div class="card">
-          <div class="card-accent" style="background:var(--c6);"></div>
-          <span class="card-icon">📣</span>
-          <div class="card-title">Marketing & acquisition</div>
-          <p class="card-desc">Campagnes d'acquisition utilisatrices (TikTok, Instagram, micro-influenceuses) et prospection B2B auprès des salons partenaires.</p>
-        </div>
-        <div class="card">
-          <div class="card-accent" style="background:var(--c6);"></div>
-          <span class="card-icon">⚙️</span>
-          <div class="card-title">Développement technique</div>
-          <p class="card-desc">Finalisation du MVP, optimisation de l'IA de simulation, infrastructure serveur et intégration Stripe pour les abonnements.</p>
-        </div>
-        <div class="card">
-          <div class="card-accent" style="background:var(--c6);"></div>
-          <span class="card-icon">🔒</span>
-          <div class="card-title">RGPD & commercial</div>
-          <p class="card-desc">Mise en conformité RGPD (traitement photos, données personnelles) et salaire du commercial pour la prospection terrain salons.</p>
         </div>
       </div>
     </div>
 
+    <div id="s6-2">
+      <div class="sub-section-header">
+        <span class="sub-section-num">6.2</span>
+        <span class="sub-section-title">Besoin financier</span>
+      </div>
+      <div class="todo-block">
+        <div class="todo-inner">
+          <span class="todo-badge">À compléter</span>
+          <p class="todo-title">Montant & allocation</p>
+          <p class="todo-desc">Présenter le montant recherché et son allocation détaillée.</p>
+          <div class="todo-items">
+            <span class="todo-item">Montant levée envisagée</span>
+            <span class="todo-item">Allocation développement</span>
+            <span class="todo-item">Allocation marketing</span>
+            <span class="todo-item">Runway cible</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div id="s6-3">
       <div class="sub-section-header">
-        <span class="sub-section-num">6.2</span>
+        <span class="sub-section-num">6.3</span>
         <span class="sub-section-title">Comment financer le projet ?</span>
       </div>
-
-      <div class="grid-2">
-        <div class="card" style="border-left:4px solid var(--amber); padding:28px 32px;">
-          <div class="card-accent" style="background:transparent;"></div>
-          <span class="card-icon">💰</span>
-          <div class="card-title">Cash / trésorerie remboursable</div>
-          <p class="card-desc" style="margin-top:8px;">Financement sous forme d'avance de trésorerie remboursable dès le troisième mois d'activité. Les premiers revenus d'abonnements (utilisatrices + salons) permettent un remboursement progressif sans dilution du capital.</p>
-        </div>
-        <div class="card" style="border-left:4px solid var(--c2); padding:28px 32px;">
-          <div class="card-accent" style="background:transparent;"></div>
-          <span class="card-icon">🎓</span>
-          <div class="card-title">Bourse / subvention</div>
-          <p class="card-desc" style="margin-top:8px;">Candidature aux dispositifs d'aide à la création d'entreprise innovante : bourses, concours, aides publiques (BPI, régionales). Financement non-dilutif permettant de couvrir les coûts de développement et de lancement.</p>
+      <div class="todo-block">
+        <div class="todo-inner">
+          <span class="todo-badge">À compléter</span>
+          <p class="todo-title">Sources de financement envisagées</p>
+          <p class="todo-desc">Détailler la stratégie de financement : aides publiques, love money, angels, fonds.</p>
+          <div class="todo-items">
+            <span class="todo-item">Aides publiques (BPI, DRARI…)</span>
+            <span class="todo-item">Love money</span>
+            <span class="todo-item">Business Angels</span>
+            <span class="todo-item">Fonds early-stage</span>
+          </div>
         </div>
       </div>
     </div>
