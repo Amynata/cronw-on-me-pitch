@@ -1,0 +1,2161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crown On Me — Dossier Projet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --noir:    #0d0d0b;
+  --amber:   #c9854a;
+  --ivoire:  #f2ece0;
+  --kraft:   #d4b896;
+  --taupe:   #8b7355;
+  --rule:    #e0d4be;
+  --white:   #ffffff;
+
+  /* Chapitre couleurs */
+  --c1: #b5462a;   /* Le Décor — rouge brique */
+  --c2: #2d7a5f;   /* La Solution — vert */
+  --c3: #1a5c8a;   /* Le Marché — bleu */
+  --c4: #6b4fa6;   /* L'Équipe — violet */
+  --c5: #c9854a;   /* L'Avancement — amber */
+  --c6: #8b5e3c;   /* Financement — brun */
+
+  --nav-w: 240px;
+  --nav-w-sm: 56px;
+}
+
+/* ─── RESET & BASE ─── */
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--ivoire);
+  color: var(--noir);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+/* ─── NAV LATÉRALE ─── */
+.sidenav {
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  width: var(--nav-w);
+  background: var(--noir);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  transition: width 0.25s ease;
+}
+
+.sidenav-logo {
+  padding: 32px 24px 24px;
+  border-bottom: 1px solid #ffffff14;
+  flex-shrink: 0;
+}
+
+.logo-wordmark {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: 1.5rem;
+  letter-spacing: 0.06em;
+  color: var(--ivoire);
+  line-height: 1;
+}
+
+.logo-wordmark em {
+  font-style: italic;
+  color: var(--amber);
+}
+
+.logo-sub {
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--taupe);
+  margin-top: 8px;
+}
+
+.sidenav-chapters {
+  flex: 1;
+  padding: 16px 0;
+}
+
+.nav-chapter {
+  margin-bottom: 4px;
+}
+
+.nav-chapter-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  text-decoration: none;
+  transition: background 0.15s;
+  border-left: 3px solid transparent;
+}
+
+.nav-chapter-btn:hover { background: #ffffff0a; }
+.nav-chapter-btn.active {
+  background: #ffffff10;
+}
+
+.nav-chapter-btn.active[data-ch="1"] { border-left-color: var(--c1); }
+.nav-chapter-btn.active[data-ch="2"] { border-left-color: var(--c2); }
+.nav-chapter-btn.active[data-ch="3"] { border-left-color: var(--c3); }
+.nav-chapter-btn.active[data-ch="4"] { border-left-color: var(--c4); }
+.nav-chapter-btn.active[data-ch="5"] { border-left-color: var(--c5); }
+.nav-chapter-btn.active[data-ch="6"] { border-left-color: var(--c6); }
+
+.nav-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.ch1 .nav-dot { background: var(--c1); }
+.ch2 .nav-dot { background: var(--c2); }
+.ch3 .nav-dot { background: var(--c3); }
+.ch4 .nav-dot { background: var(--c4); }
+.ch5 .nav-dot { background: var(--c5); }
+.ch6 .nav-dot { background: var(--c6); }
+
+.nav-label {
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: #a09080;
+  letter-spacing: 0.06em;
+  transition: color 0.15s;
+  line-height: 1.3;
+}
+
+.nav-chapter-btn.active .nav-label { color: var(--ivoire); }
+.nav-chapter-btn:hover .nav-label { color: var(--kraft); }
+
+.nav-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.7rem;
+  color: #554840;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.nav-subsections {
+  padding: 0 0 8px 40px;
+}
+
+.nav-sub-link {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 300;
+  color: #7a6858;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  padding: 4px 0;
+  transition: color 0.15s;
+}
+
+.nav-sub-link:hover { color: var(--kraft); }
+
+.sidenav-footer {
+  padding: 16px 20px;
+  border-top: 1px solid #ffffff10;
+  font-size: 0.6rem;
+  color: #5a4a3a;
+  letter-spacing: 0.08em;
+}
+
+/* ─── MAIN CONTENT ─── */
+.main {
+  margin-left: var(--nav-w);
+  min-height: 100vh;
+}
+
+/* ─── COVER ─── */
+.cover {
+  background: var(--ivoire);
+  padding: 80px 64px 72px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--rule);
+}
+
+.cover::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #c9854a12 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cover-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.cover-wordmark {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(3.5rem, 7vw, 6rem);
+  letter-spacing: 0.04em;
+  color: var(--noir);
+  line-height: 0.9;
+}
+
+.cover-wordmark em {
+  font-style: italic;
+  color: var(--amber);
+  display: block;
+}
+
+.cover-date {
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--taupe);
+  text-align: right;
+  line-height: 1.8;
+}
+
+.cover-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px 0;
+}
+
+.cover-tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  color: var(--noir);
+  line-height: 1.25;
+  max-width: 650px;
+  margin-bottom: 24px;
+}
+
+.cover-tagline em {
+  font-style: italic;
+  color: var(--amber);
+}
+
+.cover-desc {
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: var(--taupe);
+  max-width: 500px;
+  line-height: 1.8;
+}
+
+.cover-bottom {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+}
+
+.cover-nav-pill {
+  padding: 14px 10px;
+  border: 1px solid var(--rule);
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--taupe);
+  line-height: 1.5;
+  cursor: default;
+  background: var(--white);
+}
+
+.cover-nav-pill span {
+  display: block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  margin: 0 auto 8px;
+}
+
+/* ─── SECTION LAYOUT ─── */
+.chapter {
+  border-top: 4px solid;
+  padding: 72px 64px;
+  position: relative;
+}
+
+.ch1 { border-color: var(--c1); }
+.ch2 { border-color: var(--c2); }
+.ch3 { border-color: var(--c3); }
+.ch4 { border-color: var(--c4); }
+.ch5 { border-color: var(--c5); }
+.ch6 { border-color: var(--c6); }
+
+/* Alternance fond */
+.chapter:nth-child(odd) { background: var(--ivoire); }
+.chapter:nth-child(even) { background: #faf6ef; }
+
+.chapter-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.ch1 .chapter-eyebrow { color: var(--c1); }
+.ch2 .chapter-eyebrow { color: var(--c2); }
+.ch3 .chapter-eyebrow { color: var(--c3); }
+.ch4 .chapter-eyebrow { color: var(--c4); }
+.ch5 .chapter-eyebrow { color: var(--c5); }
+.ch6 .chapter-eyebrow { color: var(--c6); }
+
+.chapter-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+  line-height: 1.1;
+  color: var(--noir);
+  margin-bottom: 12px;
+}
+
+.chapter-title em {
+  font-style: italic;
+  color: var(--amber);
+}
+
+.chapter-subtitle {
+  font-size: 1.05rem;
+  font-weight: 300;
+  color: var(--taupe);
+  max-width: 620px;
+  margin-bottom: 56px;
+  line-height: 1.8;
+}
+
+/* ─── DIVIDER SECTION ─── */
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 56px 0 32px;
+}
+
+.section-divider-line {
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+
+.section-divider-label {
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--taupe);
+  white-space: nowrap;
+}
+
+/* ─── CARDS ─── */
+.card {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  padding: 32px 32px 28px;
+  position: relative;
+}
+
+.card-accent {
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 3px;
+}
+
+.ch1 .card-accent { background: var(--c1); }
+.ch2 .card-accent { background: var(--c2); }
+.ch3 .card-accent { background: var(--c3); }
+.ch4 .card-accent { background: var(--c4); }
+.ch5 .card-accent { background: var(--c5); }
+.ch6 .card-accent { background: var(--c6); }
+
+.card-icon {
+  font-size: 2rem;
+  margin-bottom: 14px;
+  display: block;
+}
+
+.card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: 1.3rem;
+  color: var(--noir);
+  margin-bottom: 10px;
+}
+
+.card-desc {
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--taupe);
+  line-height: 1.7;
+}
+
+/* ─── GRID LAYOUTS ─── */
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+/* ─── STAT BLOCKS ─── */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  margin-bottom: 40px;
+}
+
+.stat-block {
+  background: var(--white);
+  padding: 28px 24px;
+}
+
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: 3.4rem;
+  line-height: 1;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.stat-label {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--noir);
+  margin-bottom: 6px;
+  display: block;
+}
+
+.stat-desc {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--taupe);
+  line-height: 1.55;
+}
+
+.stat-source {
+  font-size: 0.75rem;
+  color: #b0a098;
+  margin-top: 8px;
+  font-style: italic;
+}
+
+/* ─── QUOTE BLOCK ─── */
+.quote-block {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  padding: 36px 40px;
+  border-left: 4px solid var(--amber);
+  margin: 40px 0;
+}
+
+.quote-text {
+  font-size: 1.15rem;
+  font-style: italic;
+  line-height: 1.8;
+  color: var(--noir);
+  margin-bottom: 12px;
+}
+
+.quote-attr {
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+
+/* ─── À COMPLÉTER ─── */
+.todo-block {
+  border: 2px dashed var(--rule);
+  padding: 40px 32px;
+  text-align: center;
+  background: #fdf9f4;
+  position: relative;
+  overflow: hidden;
+}
+
+.todo-block::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 10px,
+    #f0ebe222 10px,
+    #f0ebe222 11px
+  );
+}
+
+.todo-inner { position: relative; }
+
+.todo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--taupe);
+  background: var(--rule);
+  padding: 8px 16px;
+  margin-bottom: 16px;
+}
+
+.todo-badge::before { content: '✏️'; font-size: 1rem; }
+
+.todo-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--taupe);
+  margin-bottom: 10px;
+}
+
+.todo-desc {
+  font-size: 0.95rem;
+  color: var(--kraft);
+  line-height: 1.7;
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+.todo-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.todo-item {
+  font-size: 0.85rem;
+  color: var(--taupe);
+  background: var(--ivoire);
+  border: 1px solid var(--rule);
+  padding: 5px 14px;
+}
+
+/* ─── STEP RAIL ─── */
+.steps-rail {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.step-row {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 0 20px;
+}
+
+.step-line {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.step-num {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--amber);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 300;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.step-connector {
+  width: 1px;
+  flex: 1;
+  min-height: 20px;
+  background: #c9854a44;
+}
+
+.step-row:last-child .step-connector { display: none; }
+
+.step-card {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--amber);
+  padding: 18px 20px 20px;
+  margin-bottom: 12px;
+}
+
+.step-icon { font-size: 1.4rem; margin-bottom: 8px; }
+
+.step-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--noir);
+  margin-bottom: 6px;
+}
+
+.step-desc {
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--taupe);
+  line-height: 1.65;
+}
+
+.step-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  margin-top: 8px;
+  border-radius: 1px;
+}
+
+.badge-free { background: #f2ece0; color: var(--taupe); border: 1px solid var(--rule); }
+.badge-crown { background: #fdf0e4; color: var(--amber); border: 1px solid #c9854a44; }
+
+/* ─── PRICING CARDS ─── */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid var(--rule);
+}
+
+.pricing-card {
+  padding: 28px 20px;
+  border-right: 1px solid var(--rule);
+  position: relative;
+}
+
+.pricing-card:last-child { border-right: none; }
+
+.pricing-card.featured {
+  background: #fdf5ec;
+  border: 2px solid var(--amber);
+}
+
+.pricing-tier-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.pricing-tier-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 300;
+  color: var(--noir);
+  margin-bottom: 4px;
+}
+
+.pricing-card.featured .pricing-tier-name { color: var(--noir); }
+
+.pricing-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.4rem;
+  font-weight: 300;
+  line-height: 1;
+  margin: 16px 0 4px;
+}
+
+.pricing-period {
+  font-size: 0.82rem;
+  color: var(--taupe);
+  margin-bottom: 20px;
+}
+
+.pricing-card.featured .pricing-period { color: var(--taupe); }
+
+.pricing-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pricing-features li {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--taupe);
+  display: flex;
+  gap: 8px;
+  line-height: 1.5;
+}
+
+.pricing-card.featured .pricing-features li { color: var(--taupe); }
+
+.pricing-features li::before {
+  content: '→';
+  flex-shrink: 0;
+  color: var(--amber);
+}
+
+.pricing-tag {
+  position: absolute;
+  top: 0; right: 0;
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: var(--amber);
+  color: var(--white);
+  padding: 4px 8px;
+}
+
+/* ─── PERSONA CARD ─── */
+.persona-card {
+  border: 1px solid var(--rule);
+  margin-bottom: 24px;
+  background: var(--white);
+}
+
+.persona-band {
+  padding: 22px 24px;
+  border-left: 5px solid;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 18px;
+  align-items: start;
+}
+
+.persona-avatar {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.persona-tag {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.persona-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: var(--noir);
+  margin-bottom: 2px;
+}
+
+.persona-desc {
+  font-size: 0.95rem;
+  color: var(--taupe);
+}
+
+.persona-seg-badge {
+  font-size: 0.65rem;
+  padding: 4px 10px;
+  border-radius: 2px;
+  border: 1px solid;
+  white-space: nowrap;
+}
+
+.persona-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-top: 1px solid var(--rule);
+}
+
+.persona-col {
+  padding: 18px 20px;
+  border-right: 1px solid var(--rule);
+}
+
+.persona-col:last-child { border-right: none; }
+
+.col-title {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--taupe);
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.col-item {
+  font-size: 0.92rem;
+  color: var(--noir);
+  margin-bottom: 8px;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  line-height: 1.5;
+}
+
+.col-item-icon { flex-shrink: 0; }
+
+.persona-price-bar {
+  border-top: 2px solid;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.persona-plan-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--noir);
+}
+
+.persona-plan-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 300;
+}
+
+/* ─── REALISATION ITEMS ─── */
+.real-item {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.real-item:last-child { border-bottom: none; }
+
+.real-icon {
+  width: 44px; height: 44px;
+  background: var(--noir);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.real-content {}
+
+.real-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--noir);
+  margin-bottom: 4px;
+}
+
+.real-desc {
+  font-size: 0.95rem;
+  color: var(--taupe);
+  line-height: 1.65;
+}
+
+/* ─── ROADMAP MINI ─── */
+.roadmap-mini {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid var(--rule);
+}
+
+.roadmap-phase {
+  padding: 20px 18px;
+  border-right: 1px solid var(--rule);
+}
+
+.roadmap-phase:last-child { border-right: none; }
+
+.rm-phase-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.rm-phase-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  font-weight: 300;
+  color: var(--noir);
+  margin-bottom: 12px;
+}
+
+.rm-items {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rm-item {
+  font-size: 0.88rem;
+  color: var(--taupe);
+  display: flex;
+  gap: 8px;
+  line-height: 1.5;
+}
+
+.rm-item::before { content: '—'; color: var(--kraft); flex-shrink: 0; }
+
+/* ─── DARK BAND ─── */
+.dark-band {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  padding: 36px 64px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.dark-stat {
+  text-align: center;
+}
+
+.dark-stat .ds-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.4rem;
+  font-weight: 300;
+  display: block;
+}
+
+.dark-stat .ds-label {
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--taupe);
+  letter-spacing: 0.06em;
+}
+
+/* ─── SECTION ANCHOR HEADER ─── */
+.sub-section-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 48px 0 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.sub-section-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--amber);
+  line-height: 1;
+}
+
+.sub-section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--noir);
+}
+
+/* ─── TAG PILL ─── */
+.tag-pill {
+  display: inline-block;
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 1px;
+  border: 1px solid;
+}
+
+/* ─── FOOTER NAV ─── */
+.footer-nav {
+  background: var(--white);
+  padding: 28px 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 2px solid var(--rule);
+}
+
+.fn-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: 1.2rem;
+  color: var(--noir);
+}
+
+.fn-brand em { font-style: italic; color: var(--amber); }
+
+.fn-note {
+  font-size: 0.75rem;
+  color: var(--taupe);
+  letter-spacing: 0.1em;
+  text-align: right;
+}
+
+/* ─── MARKET BAND ─── */
+.market-band {
+  background: var(--rule);
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  border: 1px solid var(--rule);
+  margin-bottom: 40px;
+}
+
+.market-item {
+  padding: 28px 28px;
+  background: var(--white);
+  border-left: 3px solid;
+}
+
+.market-item:nth-child(1) { border-color: var(--amber); }
+.market-item:nth-child(2) { border-color: #6b4fa6; }
+.market-item:nth-child(3) { border-color: var(--c2); }
+
+.market-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--taupe);
+  margin-bottom: 8px;
+}
+
+.market-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.8rem;
+  font-weight: 300;
+  color: var(--noir);
+  line-height: 1;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.market-desc {
+  font-size: 0.88rem;
+  font-weight: 300;
+  color: var(--taupe);
+  line-height: 1.55;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .sidenav { width: var(--nav-w-sm); }
+  .sidenav .nav-label, .sidenav .nav-num, .sidenav .nav-subsections,
+  .sidenav-logo .logo-sub, .sidenav-footer { display: none; }
+  .sidenav-logo { padding: 20px 14px; }
+  .logo-wordmark { font-size: 1rem; }
+  .nav-chapter-btn { padding: 12px; justify-content: center; }
+  .nav-dot { width: 10px; height: 10px; }
+  .main { margin-left: var(--nav-w-sm); }
+  .cover, .chapter { padding: 48px 32px; }
+  .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .grid-2 { grid-template-columns: 1fr; }
+  .pricing-grid { grid-template-columns: 1fr 1fr; }
+  .persona-body { grid-template-columns: 1fr; }
+  .persona-band { grid-template-columns: auto 1fr; }
+  .persona-seg-badge { display: none; }
+  .roadmap-mini { grid-template-columns: 1fr 1fr; }
+  .market-band { grid-template-columns: 1fr; }
+  .dark-band { grid-template-columns: 1fr; padding: 32px; }
+  .cover-bottom { grid-template-columns: repeat(3, 1fr); }
+  .stat-row { grid-template-columns: 1fr; }
+  .footer-nav { padding: 24px 32px; }
+}
+
+@media (max-width: 600px) {
+  .pricing-grid { grid-template-columns: 1fr; }
+  .roadmap-mini { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ─── NAV LATÉRALE ─── -->
+<nav class="sidenav" id="sidenav">
+  <div class="sidenav-logo">
+    <div class="logo-wordmark">Crown <em>on me</em></div>
+    <div class="logo-sub">Dossier projet · 2026</div>
+  </div>
+
+  <div class="sidenav-chapters">
+
+    <div class="nav-chapter ch1">
+      <a href="#ch1" class="nav-chapter-btn" data-ch="1" onclick="setActive(this)">
+        <span class="nav-dot"></span>
+        <span class="nav-label">Le Décor</span>
+        <span class="nav-num">01</span>
+      </a>
+      <div class="nav-subsections">
+        <a href="#s1-1" class="nav-sub-link">1.1 Contexte</a>
+        <a href="#s1-2" class="nav-sub-link">1.2 Problématique</a>
+        <a href="#s1-3" class="nav-sub-link">1.3 Notre solution</a>
+      </div>
+    </div>
+
+    <div class="nav-chapter ch2">
+      <a href="#ch2" class="nav-chapter-btn" data-ch="2" onclick="setActive(this)">
+        <span class="nav-dot"></span>
+        <span class="nav-label">La Solution</span>
+        <span class="nav-num">02</span>
+      </a>
+      <div class="nav-subsections">
+        <a href="#s2-1" class="nav-sub-link">2.1 Produit</a>
+        <a href="#s2-2" class="nav-sub-link">2.2 Comment ça marche</a>
+        <a href="#s2-3" class="nav-sub-link">2.3 Notre offre</a>
+        <a href="#s2-4" class="nav-sub-link">2.4 Tarification</a>
+      </div>
+    </div>
+
+    <div class="nav-chapter ch3">
+      <a href="#ch3" class="nav-chapter-btn" data-ch="3" onclick="setActive(this)">
+        <span class="nav-dot"></span>
+        <span class="nav-label">Le Marché</span>
+        <span class="nav-num">03</span>
+      </a>
+      <div class="nav-subsections">
+        <a href="#s3-1" class="nav-sub-link">3.1 Notre cible</a>
+        <a href="#s3-2" class="nav-sub-link">3.2 Concurrence</a>
+      </div>
+    </div>
+
+    <div class="nav-chapter ch4">
+      <a href="#ch4" class="nav-chapter-btn" data-ch="4" onclick="setActive(this)">
+        <span class="nav-dot"></span>
+        <span class="nav-label">L'Équipe</span>
+        <span class="nav-num">04</span>
+      </a>
+      <div class="nav-subsections">
+        <a href="#s4-1" class="nav-sub-link">4.1 Qui sommes-nous</a>
+      </div>
+    </div>
+
+    <div class="nav-chapter ch5">
+      <a href="#ch5" class="nav-chapter-btn" data-ch="5" onclick="setActive(this)">
+        <span class="nav-dot"></span>
+        <span class="nav-label">L'Avancement</span>
+        <span class="nav-num">05</span>
+      </a>
+      <div class="nav-subsections">
+        <a href="#s5-1" class="nav-sub-link">5.1 Réalisations</a>
+        <a href="#s5-2" class="nav-sub-link">5.2 Prochaines étapes</a>
+        <a href="#s5-3" class="nav-sub-link">5.3 Projections</a>
+      </div>
+    </div>
+
+    <div class="nav-chapter ch6">
+      <a href="#ch6" class="nav-chapter-btn" data-ch="6" onclick="setActive(this)">
+        <span class="nav-dot"></span>
+        <span class="nav-label">Financement</span>
+        <span class="nav-num">06</span>
+      </a>
+      <div class="nav-subsections">
+        <a href="#s6-1" class="nav-sub-link">6.1 Nos besoins</a>
+        <a href="#s6-2" class="nav-sub-link">6.2 Besoin financier</a>
+        <a href="#s6-3" class="nav-sub-link">6.3 Financer</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="sidenav-footer">
+    Crown On Me · Confidentiel
+  </div>
+</nav>
+
+<!-- ─── MAIN ─── -->
+<main class="main">
+
+  <!-- ── COVER ── -->
+  <section class="cover" id="cover">
+    <div class="cover-top">
+      <div class="cover-wordmark">Crown<em>on me</em></div>
+      <div class="cover-date">Dossier projet<br>Juin 2026<br>La Ligue · Startup Banlieue</div>
+    </div>
+    <div class="cover-center">
+      <p class="cover-tagline">Visualise ton style<br>avant de réserver.<br><em>Fini les mauvaises surprises.</em></p>
+      <p class="cover-desc">Une application de simulation capillaire par intelligence artificielle — pensée pour les femmes aux cheveux texturés et particulièrement afro.</p>
+    </div>
+    <div class="cover-bottom">
+      <div class="cover-nav-pill"><span style="background:var(--c1)"></span>Le Décor</div>
+      <div class="cover-nav-pill"><span style="background:var(--c2)"></span>La Solution</div>
+      <div class="cover-nav-pill"><span style="background:var(--c3)"></span>Le Marché</div>
+      <div class="cover-nav-pill"><span style="background:var(--c4)"></span>L'Équipe</div>
+      <div class="cover-nav-pill"><span style="background:var(--c5)"></span>L'Avancement</div>
+      <div class="cover-nav-pill"><span style="background:var(--c6)"></span>Financement</div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       01 — LE DÉCOR
+  ══════════════════════════════════════ -->
+  <section class="chapter ch1" id="ch1">
+    <div class="chapter-eyebrow">01 — Le Décor</div>
+    <h2 class="chapter-title">Se coiffer ne devrait pas être<br><em>une prise de risque.</em></h2>
+    <p class="chapter-subtitle">Pour des millions de femmes aux cheveux texturés, chaque rendez-vous chez le coiffeur est un pari. Crown On Me est né de ce constat — et d'une expérience personnelle.</p>
+
+    <!-- 1.1 Contexte -->
+    <div id="s1-1">
+      <div class="sub-section-header">
+        <span class="sub-section-num">1.1</span>
+        <span class="sub-section-title">Contexte</span>
+      </div>
+
+      <div class="quote-block">
+        <p class="quote-text">« J'ai vécu les 3 problèmes en même temps : je ne trouvais pas de tresseuse fiable, je ne savais pas quel style choisir, et j'ai payé plus de 200€ pour une coiffure que je n'aimais pas. »</p>
+        <span class="quote-attr">— Amy, fondatrice de Crown On Me</span>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-accent"></div>
+          <span class="card-icon">🔍</span>
+          <div class="card-title">Une archive vivante</div>
+          <p class="card-desc">Les cheveux afro ne sont pas juste des cheveux. Ils sont une expression d'identité, de culture et de résistance — portée depuis des siècles. Chaque coiffure raconte une histoire.</p>
+        </div>
+        <div class="card">
+          <div class="card-accent"></div>
+          <span class="card-icon">💬</span>
+          <div class="card-title">Une communication qui échoue</div>
+          <p class="card-desc">Entre une cliente qui montre des photos Pinterest approximatives et une coiffeuse qui interprète, le malentendu est la norme. Le résultat : des heures et des centaines d'euros perdus.</p>
+        </div>
+        <div class="card">
+          <div class="card-accent"></div>
+          <span class="card-icon">🌍</span>
+          <div class="card-title">Un marché sous-servi</div>
+          <p class="card-desc">5 millions de personnes aux cheveux afro en France. Des applications beauté qui ne reconnaissent pas la texture afro. Un segment entier ignoré par les outils digitaux existants.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1.2 Problématique -->
+    <div id="s1-2">
+      <div class="sub-section-header">
+        <span class="sub-section-num">1.2</span>
+        <span class="sub-section-title">Problématique</span>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-block">
+          <span class="stat-num" style="color:var(--c1)">5M</span>
+          <span class="stat-label">Personnes concernées en France</span>
+          <p class="stat-desc">Aux cheveux texturés et particulièrement afro — un marché massif, mal adressé par les solutions digitales existantes.</p>
+          <span class="stat-source">Estimation · INSEE + études communautaires</span>
+        </div>
+        <div class="stat-block">
+          <span class="stat-num" style="color:var(--c1)">200€+</span>
+          <span class="stat-label">Dépensés par rendez-vous</span>
+          <p class="stat-desc">Coût moyen d'une coiffure afro complexe (box braids, locks, tissage). Un budget lourd à risquer sans visualisation préalable.</p>
+          <span class="stat-source">Expérience fondatrice · terrain</span>
+        </div>
+        <div class="stat-block">
+          <span class="stat-num" style="color:var(--c1)">~8K</span>
+          <span class="stat-label">Salons afro en France</span>
+          <p class="stat-desc">Estimés dont ~200 spécialisés cheveux texturés. Une offre fragmentée, peu digitalisée, sans vitrine unifiée.</p>
+          <span class="stat-source">Estimation marché · aucune donnée officielle disponible</span>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-accent"></div>
+          <span class="card-icon">😰</span>
+          <div class="card-title">Peur du résultat</div>
+          <p class="card-desc">Impossible de savoir à quoi ressemblera une coiffure sur son propre visage avant de s'asseoir dans le fauteuil. La déception est fréquente.</p>
+        </div>
+        <div class="card">
+          <div class="card-accent"></div>
+          <span class="card-icon">🔎</span>
+          <div class="card-title">Trouver la bonne coiffeuse</div>
+          <p class="card-desc">Les salons spécialisés sont peu visibles en ligne. Trouver une professionnelle de confiance, spécialisée dans son type de cheveux, relève du bouche-à-oreille.</p>
+        </div>
+        <div class="card">
+          <div class="card-accent"></div>
+          <span class="card-icon">🗣️</span>
+          <div class="card-title">Communication approximative</div>
+          <p class="card-desc">Les photos Pinterest ne correspondent jamais exactement. La cliente et la coiffeuse n'ont pas le même référentiel — et le résultat souffre de cet écart.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1.3 Solution -->
+    <div id="s1-3">
+      <div class="sub-section-header">
+        <span class="sub-section-num">1.3</span>
+        <span class="sub-section-title">Notre solution</span>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <p style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-weight:300; line-height:1.3; color:var(--noir); margin-bottom:20px;">
+            Crown On Me permet de <em style="font-style:italic;color:var(--amber)">visualiser sa coiffure avant de réserver</em> — grâce à une IA entraînée sur les cheveux texturés.
+          </p>
+          <p style="font-size:0.88rem; color:var(--taupe); line-height:1.8; margin-bottom:16px;">
+            L'utilisatrice uploade sa photo, choisit un style dans le portfolio réel d'une coiffeuse partenaire, et voit le résultat en quelques secondes. Elle arrive en salon avec une simulation — la coiffeuse sait exactement ce qui est attendu.
+          </p>
+          <p style="font-size:0.88rem; color:var(--taupe); line-height:1.8;">
+            Double impact : <strong style="color:var(--noir); font-weight:400;">l'utilisatrice ne prend plus de risque</strong>, et <strong style="color:var(--noir); font-weight:400;">la coiffeuse gagne une cliente qualifiée</strong> avec moins de temps de consultation perdu.
+          </p>
+        </div>
+        <div class="card" style="border-left:4px solid var(--amber); padding:32px;">
+          <div class="card-accent" style="background:transparent"></div>
+          <p style="font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--amber); margin-bottom:16px;">La proposition de valeur</p>
+          <div style="display:flex; flex-direction:column; gap:14px;">
+            <div style="display:flex; gap:14px; align-items:flex-start;">
+              <span style="font-size:1.2rem">📸</span>
+              <div>
+                <p style="font-size:0.85rem; font-weight:400; color:var(--noir); margin-bottom:3px;">Upload & simulation instantanée</p>
+                <p style="font-size:0.78rem; color:var(--taupe);">IA image-to-image sur cheveux texturés via Fal.ai Flux.1</p>
+              </div>
+            </div>
+            <div style="display:flex; gap:14px; align-items:flex-start;">
+              <span style="font-size:1.2rem">✂️</span>
+              <div>
+                <p style="font-size:0.85rem; font-weight:400; color:var(--noir); margin-bottom:3px;">Portfolio réel des coiffeuses</p>
+                <p style="font-size:0.78rem; color:var(--taupe);">Les styles disponibles sont des réalisations réelles — pas des suggestions génériques</p>
+              </div>
+            </div>
+            <div style="display:flex; gap:14px; align-items:flex-start;">
+              <span style="font-size:1.2rem">🤝</span>
+              <div>
+                <p style="font-size:0.85rem; font-weight:400; color:var(--noir); margin-bottom:3px;">Connexion directe salon</p>
+                <p style="font-size:0.78rem; color:var(--taupe);">Réservation intégrée — la simulation voyage avec le rendez-vous</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       02 — LA SOLUTION
+  ══════════════════════════════════════ -->
+  <section class="chapter ch2" id="ch2">
+    <div class="chapter-eyebrow">02 — La Solution</div>
+    <h2 class="chapter-title">Le produit — <em>de la simulation<br>à la réservation</em></h2>
+    <p class="chapter-subtitle">Crown On Me est une application mobile et web B2B2C : les coiffeuses fournissent leur portfolio, les utilisatrices simulent et réservent.</p>
+
+    <!-- 2.1 Produit -->
+    <div id="s2-1">
+      <div class="sub-section-header">
+        <span class="sub-section-num">2.1</span>
+        <span class="sub-section-title">Produit / Service</span>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-accent"></div>
+          <span class="card-icon">🤖</span>
+          <div class="card-title">Simulation IA</div>
+          <p class="card-desc">Génération d'image par intelligence artificielle (Fal.ai Flux.1, image-to-image) — optimisée pour les textures afro : box braids, locks, twist out, balayage, et plus.</p>
+        </div>
+        <div class="card">
+          <div class="card-accent"></div>
+          <span class="card-icon">🗂️</span>
+          <div class="card-title">Portfolio coiffeuses</div>
+          <p class="card-desc">Les styles disponibles à la simulation sont les réalisations réelles des coiffeuses partenaires. Ce que tu simules, la coiffeuse sait le faire.</p>
+        </div>
+        <div class="card">
+          <div class="card-accent"></div>
+          <span class="card-icon">📅</span>
+          <div class="card-title">Réservation intégrée</div>
+          <p class="card-desc">Calendrier en temps réel, rappel 24h, et simulation jointe automatiquement à la réservation. La coiffeuse sait exactement ce qui est attendu avant que la cliente arrive.</p>
+        </div>
+        <div class="card">
+          <div class="card-accent"></div>
+          <span class="card-icon">🗺️</span>
+          <div class="card-title">Annuaire géolocalisé</div>
+          <p class="card-desc">Toutes les coiffeuses spécialisées afro autour de l'utilisatrice. Filtres par style, tarif, disponibilité et avis clients vérifiés.</p>
+        </div>
+        <div class="card">
+          <div class="card-accent"></div>
+          <span class="card-icon">🧶</span>
+          <div class="card-title">Demande de mèches</div>
+          <p class="card-desc">Depuis la simulation validée, l'utilisatrice demande à la coiffeuse de préparer les mèches nécessaires. Zéro surprise le jour J.</p>
+        </div>
+        <div class="card">
+          <div class="card-accent"></div>
+          <span class="card-icon">🧴</span>
+          <div class="card-title">Routine capillaire</div>
+          <p class="card-desc">Après le rendez-vous, l'app suggère une routine adaptée à la nouvelle coiffure. L'utilisatrice commence par ses propres produits — sans pression d'achat.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2.2 Parcours utilisateur -->
+    <div id="s2-2">
+      <div class="sub-section-header">
+        <span class="sub-section-num">2.2</span>
+        <span class="sub-section-title">Comment ça fonctionne ?</span>
+      </div>
+
+      <div class="steps-rail">
+        <div class="step-row">
+          <div class="step-line">
+            <div class="step-num">1</div>
+            <div class="step-connector"></div>
+          </div>
+          <div class="step-card">
+            <div class="step-icon">📱</div>
+            <div class="step-title">Découverte de l'app</div>
+            <p class="step-desc">Elle trouve Crown On Me via TikTok, une amie ou l'App Store. Accès immédiat à la simulation — aucune inscription requise pour démarrer.</p>
+            <span class="step-badge badge-free">Freemium</span>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-line">
+            <div class="step-num">2</div>
+            <div class="step-connector"></div>
+          </div>
+          <div class="step-card">
+            <div class="step-icon">📸</div>
+            <div class="step-title">Upload de sa photo</div>
+            <p class="step-desc">Elle uploade un selfie ou choisit une photo depuis sa galerie. Prévisualisation instantanée. La photo est traitée localement — non stockée sans compte.</p>
+            <span class="step-badge badge-free">Freemium</span>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-line">
+            <div class="step-num">3</div>
+            <div class="step-connector"></div>
+          </div>
+          <div class="step-card">
+            <div class="step-icon">✂️</div>
+            <div class="step-title">Choix d'un style — portfolio coiffeuse</div>
+            <p class="step-desc">Elle parcourt les vraies réalisations de coiffeuses disponibles sur la plateforme : box braids, locks, twist out, balayage… Elle choisit le style qu'elle veut simuler. Filtrable par style, longueur, coiffeuse.</p>
+            <span class="step-badge badge-free">Freemium</span>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-line">
+            <div class="step-num">4</div>
+            <div class="step-connector"></div>
+          </div>
+          <div class="step-card">
+            <div class="step-icon">🤖</div>
+            <div class="step-title">Simulation IA — résultat avant / après</div>
+            <p class="step-desc">L'IA génère la coiffure sur sa photo en quelques secondes via Fal.ai. Elle voit le résultat côte à côte avec sa photo originale. Jusqu'à 5 simulations en accès gratuit.</p>
+            <span class="step-badge badge-free">5 simulations gratuites · sans CB</span>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-line">
+            <div class="step-num">5</div>
+            <div class="step-connector"></div>
+          </div>
+          <div class="step-card">
+            <div class="step-icon">💾</div>
+            <div class="step-title">Validation & sauvegarde du look</div>
+            <p class="step-desc">Elle valide son style préféré, le sauvegarde dans sa bibliothèque et partage l'image directement avec sa coiffeuse ou sur ses réseaux. Export haute qualité.</p>
+            <span class="step-badge badge-free">Freemium</span>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-line">
+            <div class="step-num">6</div>
+            <div class="step-connector"></div>
+          </div>
+          <div class="step-card">
+            <div class="step-icon">📅</div>
+            <div class="step-title">Réservation — la simulation voyage avec le RDV</div>
+            <p class="step-desc">Elle réserve directement sur le calendrier de la coiffeuse. Le style simulé est automatiquement joint à la réservation. La coiffeuse prépare les mèches en amont. Zéro surprise.</p>
+            <span class="step-badge badge-crown">Plan Crown</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2.3 Offre -->
+    <div id="s2-3">
+      <div class="sub-section-header">
+        <span class="sub-section-num">2.3</span>
+        <span class="sub-section-title">Notre offre</span>
+      </div>
+
+      <div class="grid-2" style="margin-bottom:24px;">
+        <div class="card" style="border-left:3px solid var(--amber);">
+          <div class="card-accent" style="background:transparent;"></div>
+          <p style="font-size:0.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin-bottom:8px;">Côté utilisatrices (B2C)</p>
+          <div class="card-title">Freemium → Payant</div>
+          <p class="card-desc" style="margin-top:8px;">Accès gratuit jusqu'à 5 simulations sans carte bancaire. Conversion vers Plan Crown (4,99€/mois) pour débloquer les simulations illimitées, personnalisation longueur/couleur, réservation intégrée et demande de mèches.</p>
+        </div>
+        <div class="card" style="border-left:3px solid var(--c2);">
+          <div class="card-accent" style="background:transparent;"></div>
+          <p style="font-size:0.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--c2);margin-bottom:8px;">Côté coiffeuses (B2B2C)</p>
+          <div class="card-title">Abonnement Pro Salon</div>
+          <p class="card-desc" style="margin-top:8px;">Portfolio numérique, fiche salon géolocalisée, calendrier de réservation, statistiques de visibilité. Deux niveaux : Pro Salon Essentiel et Pro Salon + IA (génération automatique de catalogue).</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2.4 Tarification -->
+    <div id="s2-4">
+      <div class="sub-section-header">
+        <span class="sub-section-num">2.4</span>
+        <span class="sub-section-title">Tarification</span>
+      </div>
+
+      <div class="pricing-grid">
+
+        <!-- Découverte -->
+        <div class="pricing-card">
+          <p class="pricing-tier-label" style="color:var(--taupe)">Utilisatrice</p>
+          <p class="pricing-tier-name">Découverte</p>
+          <p class="pricing-price" style="color:var(--taupe)">Gratuit</p>
+          <p class="pricing-period">sans carte bancaire</p>
+          <ul class="pricing-features">
+            <li>Jusqu'à 5 simulations</li>
+            <li>Styles de base</li>
+            <li>Export pour montrer au coiffeur</li>
+            <li>Accès annuaire salons</li>
+          </ul>
+        </div>
+
+        <!-- Crown -->
+        <div class="pricing-card featured">
+          <div class="pricing-tag">Cœur de cible</div>
+          <p class="pricing-tier-label" style="color:var(--amber)">Utilisatrice</p>
+          <p class="pricing-tier-name">Crown</p>
+          <p class="pricing-price" style="color:var(--amber)">4,99€</p>
+          <p class="pricing-period">/mois · ou 44€/an (−25%)</p>
+          <ul class="pricing-features">
+            <li>Simulations illimitées</li>
+            <li>Modification longueur & couleur</li>
+            <li>Bibliothèque de looks</li>
+            <li>Demande de mèches coiffeuse</li>
+            <li>Réservation intégrée</li>
+            <li>Export haute qualité</li>
+          </ul>
+        </div>
+
+        <!-- Pro Salon -->
+        <div class="pricing-card">
+          <p class="pricing-tier-label" style="color:var(--c2)">Coiffeuse</p>
+          <p class="pricing-tier-name">Pro Salon</p>
+          <p class="pricing-price" style="color:var(--c2)">39€</p>
+          <p class="pricing-period">/mois</p>
+          <ul class="pricing-features">
+            <li>Portfolio numérique</li>
+            <li>Fiche salon géolocalisée</li>
+            <li>Calendrier & réservations</li>
+            <li>Messagerie clientes</li>
+            <li>Stats de visibilité</li>
+            <li>Badge Salon certifié</li>
+          </ul>
+        </div>
+
+        <!-- Entreprise -->
+        <div class="pricing-card">
+          <p class="pricing-tier-label" style="color:var(--c3)">B2B / API</p>
+          <p class="pricing-tier-name">Entreprise</p>
+          <p class="pricing-price" style="color:var(--c3)">499€+</p>
+          <p class="pricing-period">/mois · sur devis</p>
+          <ul class="pricing-features">
+            <li>API widget iframe</li>
+            <li>Intégration e-commerce beauté</li>
+            <li>Apps beauté partenaires</li>
+            <li>SLA garanti</li>
+            <li>Support dédié</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Roadmap mini -->
+      <div class="section-divider">
+        <div class="section-divider-line"></div>
+        <span class="section-divider-label">Roadmap produit</span>
+        <div class="section-divider-line"></div>
+      </div>
+
+      <div class="roadmap-mini">
+        <div class="roadmap-phase">
+          <span class="rm-phase-label" style="color:var(--c2)">Phase 1 · MVP</span>
+          <p class="rm-phase-title">La simulation</p>
+          <div class="rm-items">
+            <p class="rm-item">Upload photo</p>
+            <p class="rm-item">Portfolio coiffeuse (hardcodé)</p>
+            <p class="rm-item">Simulation Fal.ai</p>
+            <p class="rm-item">Résultat avant/après</p>
+            <p class="rm-item">Fiche coiffeuse</p>
+          </div>
+        </div>
+        <div class="roadmap-phase">
+          <span class="rm-phase-label" style="color:#5b6fa6">Phase 2 · Bientôt</span>
+          <p class="rm-phase-title">L'écosystème</p>
+          <div class="rm-items">
+            <p class="rm-item">Compte utilisatrice</p>
+            <p class="rm-item">Abonnement Crown + Stripe</p>
+            <p class="rm-item">Annuaire géolocalisé</p>
+            <p class="rm-item">Avis & notation</p>
+            <p class="rm-item">Offre Pro Salon</p>
+          </div>
+        </div>
+        <div class="roadmap-phase">
+          <span class="rm-phase-label" style="color:#8b5e3c">Phase 3 · Futur</span>
+          <p class="rm-phase-title">USA & Expansion</p>
+          <div class="rm-items">
+            <p class="rm-item">Expansion USA (EN)</p>
+            <p class="rm-item">B2B API / Widget</p>
+            <p class="rm-item">Communauté & tendances</p>
+            <p class="rm-item">Affiliation produits</p>
+          </div>
+        </div>
+        <div class="roadmap-phase">
+          <span class="rm-phase-label" style="color:var(--amber)">Phase 4 · Expansion</span>
+          <p class="rm-phase-title">Afrique & Global</p>
+          <div class="rm-items">
+            <p class="rm-item">Sénégal, Côte d'Ivoire, Cameroun</p>
+            <p class="rm-item">Langues locales</p>
+            <p class="rm-item">Partenariats marques afro</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       03 — LE MARCHÉ
+  ══════════════════════════════════════ -->
+  <section class="chapter ch3" id="ch3">
+    <div class="chapter-eyebrow">03 — Le Marché</div>
+    <h2 class="chapter-title">Une cible massive,<br><em>sous-adressée.</em></h2>
+    <p class="chapter-subtitle">5 millions de personnes en France. Un marché adressable de 1,5M d'utilisatrices actives potentielles. Et une offre digitale quasi-inexistante pour les cheveux texturés.</p>
+
+    <div class="market-band">
+      <div class="market-item">
+        <p class="market-label">TAM · Marché total France</p>
+        <span class="market-num">5M</span>
+        <p class="market-desc">Personnes aux cheveux afro en France. Base de calcul pour toutes les projections.</p>
+      </div>
+      <div class="market-item">
+        <p class="market-label">SAM · Marché adressable</p>
+        <span class="market-num">~1,5M</span>
+        <p class="market-desc">Smartphone + intérêt actif pour la coiffure — environ 30% du TAM.</p>
+      </div>
+      <div class="market-item">
+        <p class="market-label">SOM · Marché captable 5 ans</p>
+        <span class="market-num">15–75K</span>
+        <p class="market-desc">1 à 5% du SAM sur 5 ans (scénario bas à haut). Hors Europe et Afrique.</p>
+      </div>
+    </div>
+
+    <!-- 3.1 Notre cible -->
+    <div id="s3-1">
+      <div class="sub-section-header">
+        <span class="sub-section-num">3.1</span>
+        <span class="sub-section-title">Notre cible</span>
+      </div>
+
+      <!-- Persona 1 -->
+      <div class="persona-card">
+        <div class="persona-band" style="border-color:#6b4fa6; background:#f5f2fc;">
+          <div class="persona-avatar" style="background:#e8e0f8;">🌱</div>
+          <div>
+            <p class="persona-tag" style="color:#6b4fa6;">Persona 1 · B2C · Utilisatrice</p>
+            <p class="persona-name">Amara, 22 ans — La Découvreuse</p>
+            <p class="persona-desc">Étudiante, Paris. En transition capillaire depuis 6 mois. Découvre le mouvement cheveux naturels.</p>
+          </div>
+          <div class="persona-seg-badge" style="color:#6b4fa6; border-color:#c4b0f0; background:#ede8f8;">Freemium → Payant</div>
+        </div>
+        <div class="persona-body">
+          <div class="persona-col">
+            <p class="col-title">Frustrations</p>
+            <div class="col-item"><span class="col-item-icon">→</span>Peur de mal communiquer avec sa coiffeuse</div>
+            <div class="col-item"><span class="col-item-icon">→</span>Passe des heures sur Pinterest sans trouver son style</div>
+            <div class="col-item"><span class="col-item-icon">→</span>Budget limité — pas envie de rater une coiffure chère</div>
+          </div>
+          <div class="persona-col">
+            <p class="col-title">Motivations</p>
+            <div class="col-item"><span class="col-item-icon">✦</span>Tester des coiffures virtuellement sans risque</div>
+            <div class="col-item"><span class="col-item-icon">✦</span>Montrer à sa coiffeuse exactement ce qu'elle veut</div>
+            <div class="col-item"><span class="col-item-icon">✦</span>Partager ses looks simulés sur Instagram/TikTok</div>
+          </div>
+          <div class="persona-col">
+            <p class="col-title">Contexte</p>
+            <div class="col-item"><span class="col-item-icon">📱</span>Très active sur TikTok, suit des créatrices nappy</div>
+            <div class="col-item"><span class="col-item-icon">💶</span>Budget beauté : 40–60€/mois</div>
+            <div class="col-item"><span class="col-item-icon">🔒</span>Commencera en gratuit, convertira sur la preuve</div>
+          </div>
+        </div>
+        <div class="persona-price-bar" style="border-color:#6b4fa6; background:#f5f2fc;">
+          <div>
+            <p style="font-size:0.6rem;letter-spacing:.12em;text-transform:uppercase;color:#6b4fa6;margin-bottom:4px;">Abonnement recommandé</p>
+            <p class="persona-plan-name">Plan Découverte · Freemium</p>
+          </div>
+          <p class="persona-plan-price" style="color:#6b4fa6;">Gratuit</p>
+        </div>
+      </div>
+
+      <!-- Persona 2 -->
+      <div class="persona-card">
+        <div class="persona-band" style="border-color:var(--amber); background:#fdf8f0;">
+          <div class="persona-avatar" style="background:#f5e8c8;">👑</div>
+          <div>
+            <p class="persona-tag" style="color:var(--amber);">Persona 2 · B2C · Utilisatrice engagée</p>
+            <p class="persona-name">Fatou, 31 ans — La Passionnée</p>
+            <p class="persona-desc">Cadre marketing, Lyon. Cheveux naturels depuis 3 ans. La coiffure est une expression identitaire forte.</p>
+          </div>
+          <div class="persona-seg-badge" style="color:var(--amber); border-color:#e8c870; background:#f5e8c8;">Payante dès le départ</div>
+        </div>
+        <div class="persona-body">
+          <div class="persona-col">
+            <p class="col-title">Frustrations</p>
+            <div class="col-item"><span class="col-item-icon">→</span>Change souvent de style — veut tester avant de se lancer</div>
+            <div class="col-item"><span class="col-item-icon">→</span>Les apps existantes ne reconnaissent pas les cheveux afro</div>
+            <div class="col-item"><span class="col-item-icon">→</span>Manque de références visuelles adaptées à sa texture</div>
+          </div>
+          <div class="persona-col">
+            <p class="col-title">Motivations</p>
+            <div class="col-item"><span class="col-item-icon">✦</span>Simuler plusieurs styles avant chaque rendez-vous</div>
+            <div class="col-item"><span class="col-item-icon">✦</span>Constituer une bibliothèque de ses looks préférés</div>
+            <div class="col-item"><span class="col-item-icon">✦</span>Prescriptrice — recommande les apps qu'elle aime</div>
+          </div>
+          <div class="persona-col">
+            <p class="col-title">Contexte</p>
+            <div class="col-item"><span class="col-item-icon">📱</span>Utilise l'app 2–3 fois par mois</div>
+            <div class="col-item"><span class="col-item-icon">💶</span>Budget beauté : 80–120€/mois</div>
+            <div class="col-item"><span class="col-item-icon">💳</span>Prête à payer pour un service de qualité</div>
+          </div>
+        </div>
+        <div class="persona-price-bar" style="border-color:var(--amber); background:#fdf8f0;">
+          <div>
+            <p style="font-size:0.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:4px;">Abonnement recommandé</p>
+            <p class="persona-plan-name">Plan Crown — Standard</p>
+          </div>
+          <p class="persona-plan-price" style="color:var(--amber);">4,99€<span style="font-size:0.8rem;color:var(--taupe);">/mois</span></p>
+        </div>
+      </div>
+
+      <!-- Persona 3 -->
+      <div class="persona-card">
+        <div class="persona-band" style="border-color:var(--c2); background:#f0faf5;">
+          <div class="persona-avatar" style="background:#c8eede;">✂️</div>
+          <div>
+            <p class="persona-tag" style="color:var(--c2);">Persona 3 · B2B2C · Professionnelle</p>
+            <p class="persona-name">Nadège, 35 ans — La Coiffeuse Pro</p>
+            <p class="persona-desc">Gérante d'un salon afro à Bordeaux. 8 ans d'expérience, 200 clientes régulières.</p>
+          </div>
+          <div class="persona-seg-badge" style="color:var(--c2); border-color:#90d4b8; background:#c8eede;">Priorité prospection B2B</div>
+        </div>
+        <div class="persona-body">
+          <div class="persona-col">
+            <p class="col-title">Enjeux Crown On Me</p>
+            <div class="col-item"><span class="col-item-icon">→</span>Vitrine digitale et portfolio en ligne</div>
+            <div class="col-item"><span class="col-item-icon">→</span>Acquisition de nouvelles clientes via l'annuaire</div>
+            <div class="col-item"><span class="col-item-icon">→</span>Outil de consultation en salon</div>
+          </div>
+          <div class="persona-col">
+            <p class="col-title">Profil A — Salon</p>
+            <div class="col-item"><span class="col-item-icon">🏠</span>~200 salons spécialisés cheveux texturés</div>
+            <div class="col-item"><span class="col-item-icon">🎯</span>Priorité prospection B2B directe</div>
+            <div class="col-item"><span class="col-item-icon">📍</span>Paris, Lyon, Bordeaux, Marseille</div>
+          </div>
+          <div class="persona-col">
+            <p class="col-title">Profil B — Itinérante</p>
+            <div class="col-item"><span class="col-item-icon">🚶‍♀️</span>Sans salon fixe, domicile / déplacement</div>
+            <div class="col-item"><span class="col-item-icon">📈</span>Segment en forte croissance (auto-entrepreneures)</div>
+            <div class="col-item"><span class="col-item-icon">💡</span>Besoin fort de portfolio numérique</div>
+          </div>
+        </div>
+        <div class="persona-price-bar" style="border-color:var(--c2); background:#f0faf5;">
+          <div>
+            <p style="font-size:0.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--c2);margin-bottom:4px;">Abonnement recommandé</p>
+            <p class="persona-plan-name">Pro Salon</p>
+          </div>
+          <p class="persona-plan-price" style="color:var(--c2);">39€<span style="font-size:0.8rem;color:var(--taupe);">/mois</span></p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 3.2 Concurrence -->
+    <div id="s3-2">
+      <div class="sub-section-header">
+        <span class="sub-section-num">3.2</span>
+        <span class="sub-section-title">La concurrence</span>
+      </div>
+      <div class="todo-block">
+        <div class="todo-inner">
+          <span class="todo-badge">À compléter</span>
+          <p class="todo-title">Analyse concurrentielle</p>
+          <p class="todo-desc">Présenter les acteurs existants, leurs forces et faiblesses, et le positionnement différenciateur de Crown On Me.</p>
+          <div class="todo-items">
+            <span class="todo-item">Apps de simulation beauté</span>
+            <span class="todo-item">Plateformes de réservation salon</span>
+            <span class="todo-item">Solutions spécialisées afro</span>
+            <span class="todo-item">Tableau comparatif</span>
+            <span class="todo-item">Avantages différenciateurs</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       04 — L'ÉQUIPE
+  ══════════════════════════════════════ -->
+  <section class="chapter ch4" id="ch4">
+    <div class="chapter-eyebrow">04 — L'Équipe</div>
+    <h2 class="chapter-title">Qui sommes-nous ?</h2>
+    <p class="chapter-subtitle">Crown On Me est fondé par une utilisatrice du produit — qui a vécu le problème de l'intérieur.</p>
+
+    <div id="s4-1">
+      <div class="sub-section-header">
+        <span class="sub-section-num">4.1</span>
+        <span class="sub-section-title">La fondatrice</span>
+      </div>
+
+      <div class="quote-block" style="margin-top:0;">
+        <p class="quote-text">« J'ai vécu les 3 problèmes en même temps. C'est de cette frustration qu'est née l'idée de Crown On Me — parce que personne ne devrait payer 200€ pour un résultat qu'on n'avait pas demandé. »</p>
+        <span class="quote-attr">— Amy, fondatrice · Crown On Me</span>
+      </div>
+
+      <div class="grid-2" style="margin-bottom:40px;">
+        <div class="card" style="border-left:3px solid var(--c4);">
+          <div class="card-accent" style="background:transparent;"></div>
+          <span class="card-icon">👤</span>
+          <div class="card-title">Amy — Fondatrice</div>
+          <p class="card-desc">Background en product management. Construit Crown On Me avec des outils no-code/low-code et IA. Participe à La Ligue, l'accélérateur de Startup Banlieue.</p>
+        </div>
+        <div class="todo-block" style="height:100%; min-height:160px;">
+          <div class="todo-inner">
+            <span class="todo-badge">À compléter</span>
+            <p class="todo-title">Membres de l'équipe</p>
+            <p class="todo-desc">Présenter les co-fondateurs, mentors et collaborateurs qui rejoignent l'aventure.</p>
+            <div class="todo-items">
+              <span class="todo-item">ML / AI Engineer</span>
+              <span class="todo-item">UX / UI Designer</span>
+              <span class="todo-item">Advisors</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dark-band">
+        <div class="dark-stat">
+          <span class="ds-num" style="color:var(--amber);">La Ligue</span>
+          <span class="ds-label">Accélérateur Startup Banlieue · 2026</span>
+        </div>
+        <div class="dark-stat">
+          <span class="ds-num" style="color:var(--amber);">PM</span>
+          <span class="ds-label">Background product management · no-code / IA</span>
+        </div>
+        <div class="dark-stat">
+          <span class="ds-num" style="color:var(--amber);">Solo</span>
+          <span class="ds-label">Build solo · recrutement en cours (La Ligue)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       05 — L'AVANCEMENT
+  ══════════════════════════════════════ -->
+  <section class="chapter ch5" id="ch5">
+    <div class="chapter-eyebrow">05 — L'Avancement</div>
+    <h2 class="chapter-title">Ce qui a été <em>fait, validé, construit.</em></h2>
+    <p class="chapter-subtitle">Avant de coder une seule ligne, les fondamentaux ont été posés — terrain, marché, identité, architecture produit.</p>
+
+    <!-- 5.1 Réalisations -->
+    <div id="s5-1">
+      <div class="sub-section-header">
+        <span class="sub-section-num">5.1</span>
+        <span class="sub-section-title">Réalisations</span>
+      </div>
+
+      <div class="real-item">
+        <div class="real-icon">🔍</div>
+        <div class="real-content">
+          <p class="real-title">Enquêtes terrain — salons & coiffeuses</p>
+          <p class="real-desc">Interviews menées auprès de coiffeuses et gérants de salons afro en France. Validation des problèmes côté professionnel : absence de vitrine digitale, clientes mal préparées, temps de consultation non-optimisé.</p>
+        </div>
+      </div>
+
+      <div class="real-item">
+        <div class="real-icon">👥</div>
+        <div class="real-content">
+          <p class="real-title">Interviews utilisatrices</p>
+          <p class="real-desc">Retours collectés auprès de femmes aux cheveux texturés. Validation des frustrations clés : peur du résultat, difficulté à communiquer avec la coiffeuse, manque d'outils adaptés aux cheveux afro.</p>
+        </div>
+      </div>
+
+      <div class="real-item">
+        <div class="real-icon">🎨</div>
+        <div class="real-content">
+          <p class="real-title">Identité visuelle — charte complète</p>
+          <p class="real-desc">Palette 3 couleurs (Noir #0d0d0b · Amber #c9854a · Ivoire #f2ece0), typographie (Cormorant Garamond + DM Sans), règles d'usage, mockup mobile. Une identité éditoriale et minimaliste, crédible pour les jurys investisseurs.</p>
+        </div>
+      </div>
+
+      <div class="real-item">
+        <div class="real-icon">📋</div>
+        <div class="real-content">
+          <p class="real-title">Architecture produit — 30 features, 4 phases</p>
+          <p class="real-desc">Roadmap complète documentée : MVP (Phase 1), Écosystème (Phase 2), USA (Phase 3), Afrique & Global (Phase 4). Chaque feature catégorisée par segment (utilisatrices, salons, B2B, admin) et niveau de complexité.</p>
+        </div>
+      </div>
+
+      <div class="real-item">
+        <div class="real-icon">📊</div>
+        <div class="real-content">
+          <p class="real-title">Étude de marché & projections financières</p>
+          <p class="real-desc">Analyse du TAM/SAM/SOM France. Projections sur 4 segments (utilisatrices, salons, B2B/API, affiliation) sur 3 scénarios (bas/moyen/haut) à 1, 3 et 5 ans. Données sourcées distinguées des estimations.</p>
+        </div>
+      </div>
+
+      <div class="real-item">
+        <div class="real-icon">🖼️</div>
+        <div class="real-content">
+          <p class="real-title">Parcours utilisateurs complets — documentation produit</p>
+          <p class="real-desc">Parcours utilisatrice (8 étapes, de la découverte à la fidélisation) et parcours coiffeuse (onboarding, portfolio, gestion clientes). Point de convergence B2B2C documenté. Personas & abonnements alignés.</p>
+        </div>
+      </div>
+
+      <div class="real-item">
+        <div class="real-icon">⚡</div>
+        <div class="real-content">
+          <p class="real-title">MVP en construction — stack technique défini</p>
+          <p class="real-desc">FlutterFlow (app mobile/web) + Firebase (backend) + Fal.ai Flux.1 (IA image-to-image) + Make.com (automation). Brief de développement complet rédigé. Build MVP en cours via Claude Code CLI.</p>
+        </div>
+      </div>
+
+      <div class="real-item" style="border-bottom:none;">
+        <div class="real-icon">🏆</div>
+        <div class="real-content">
+          <p class="real-title">Sélection La Ligue — Startup Banlieue</p>
+          <p class="real-desc">Sélectionnée à l'issue d'un weekend de détection pour rejoindre La Ligue, le programme d'accélération de Startup Banlieue. Programme de 6 mois en cours.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5.2 Prochaines étapes -->
+    <div id="s5-2">
+      <div class="sub-section-header">
+        <span class="sub-section-num">5.2</span>
+        <span class="sub-section-title">Prochaines étapes</span>
+      </div>
+      <div class="todo-block">
+        <div class="todo-inner">
+          <span class="todo-badge">À compléter</span>
+          <p class="todo-title">Jalons à venir</p>
+          <p class="todo-desc">Les prochaines étapes de validation et de lancement.</p>
+          <div class="todo-items">
+            <span class="todo-item">MVP fonctionnel</span>
+            <span class="todo-item">Premier contrat B2B salon signé</span>
+            <span class="todo-item">Tests utilisateurs</span>
+            <span class="todo-item">Lancement bêta</span>
+            <span class="todo-item">Recrutement ML Engineer + UX</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5.3 Projections -->
+    <div id="s5-3">
+      <div class="sub-section-header">
+        <span class="sub-section-num">5.3</span>
+        <span class="sub-section-title">Projections</span>
+      </div>
+
+      <!-- Résumé projections — données réelles -->
+      <div class="dark-band" style="margin-bottom:24px;">
+        <div class="dark-stat">
+          <span class="ds-num" style="color:var(--amber);">24K€</span>
+          <span class="ds-label">ARR moyen an 1 · scénario moyen</span>
+        </div>
+        <div class="dark-stat">
+          <span class="ds-num" style="color:var(--amber);">230K€</span>
+          <span class="ds-label">ARR an 3 · scénario moyen</span>
+        </div>
+        <div class="dark-stat">
+          <span class="ds-num" style="color:var(--amber);">~1M€</span>
+          <span class="ds-label">ARR an 5 · scénario moyen (tous segments)</span>
+        </div>
+      </div>
+
+      <div class="todo-block">
+        <div class="todo-inner">
+          <span class="todo-badge">À compléter</span>
+          <p class="todo-title">Tableau de projections détaillé</p>
+          <p class="todo-desc">Ajouter ici les projections complètes par segment, avec les hypothèses et les 3 scénarios.</p>
+          <div class="todo-items">
+            <span class="todo-item">Segment utilisatrices B2C</span>
+            <span class="todo-item">Segment salons B2B2C</span>
+            <span class="todo-item">Segment B2B API</span>
+            <span class="todo-item">Affiliation produits</span>
+          </div>
+        </div>
+      </div>
+
+      <p style="font-size:0.7rem; color:var(--taupe); margin-top:12px; font-style:italic;">
+        ⚠️ Les chiffres affichés ci-dessus sont des estimations basées sur des hypothèses de marché. Les projections complètes et sourcées sont disponibles dans le document « Projections de Conquête ».
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       06 — FINANCEMENT
+  ══════════════════════════════════════ -->
+  <section class="chapter ch6" id="ch6">
+    <div class="chapter-eyebrow">06 — Financement</div>
+    <h2 class="chapter-title">Nos besoins<br><em>& notre stratégie.</em></h2>
+    <p class="chapter-subtitle">Cette section sera complétée après les premières validations terrain.</p>
+
+    <div id="s6-1">
+      <div class="sub-section-header">
+        <span class="sub-section-num">6.1</span>
+        <span class="sub-section-title">Nos besoins</span>
+      </div>
+      <div class="todo-block">
+        <div class="todo-inner">
+          <span class="todo-badge">À compléter</span>
+          <p class="todo-title">Ce dont nous avons besoin</p>
+          <p class="todo-desc">Décrire les ressources humaines, techniques et financières nécessaires pour franchir les prochaines étapes.</p>
+          <div class="todo-items">
+            <span class="todo-item">ML / AI Engineer</span>
+            <span class="todo-item">UX / UI Designer</span>
+            <span class="todo-item">Infrastructure technique</span>
+            <span class="todo-item">Coûts IA (Fal.ai)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="s6-2">
+      <div class="sub-section-header">
+        <span class="sub-section-num">6.2</span>
+        <span class="sub-section-title">Besoin financier</span>
+      </div>
+      <div class="todo-block">
+        <div class="todo-inner">
+          <span class="todo-badge">À compléter</span>
+          <p class="todo-title">Montant & allocation</p>
+          <p class="todo-desc">Présenter le montant recherché et son allocation détaillée.</p>
+          <div class="todo-items">
+            <span class="todo-item">Montant levée envisagée</span>
+            <span class="todo-item">Allocation développement</span>
+            <span class="todo-item">Allocation marketing</span>
+            <span class="todo-item">Runway cible</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="s6-3">
+      <div class="sub-section-header">
+        <span class="sub-section-num">6.3</span>
+        <span class="sub-section-title">Comment financer le projet ?</span>
+      </div>
+      <div class="todo-block">
+        <div class="todo-inner">
+          <span class="todo-badge">À compléter</span>
+          <p class="todo-title">Sources de financement envisagées</p>
+          <p class="todo-desc">Détailler la stratégie de financement : aides publiques, love money, angels, fonds.</p>
+          <div class="todo-items">
+            <span class="todo-item">Aides publiques (BPI, DRARI…)</span>
+            <span class="todo-item">Love money</span>
+            <span class="todo-item">Business Angels</span>
+            <span class="todo-item">Fonds early-stage</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── FOOTER ── -->
+  <footer class="footer-nav">
+    <div class="fn-brand">Crown <em>on me</em></div>
+    <div class="fn-note">
+      Dossier confidentiel · Juin 2026<br>
+      La Ligue · Startup Banlieue
+    </div>
+  </footer>
+
+</main>
+
+<script>
+// Active state sur la nav
+function setActive(el) {
+  document.querySelectorAll('.nav-chapter-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// Scroll spy — active le bon chapitre dans la nav
+const chapters = ['cover','ch1','ch2','ch3','ch4','ch5','ch6'];
+const btns = document.querySelectorAll('.nav-chapter-btn');
+
+function updateNav() {
+  const scrollY = window.scrollY + window.innerHeight * 0.3;
+  let current = 'ch1';
+
+  document.querySelectorAll('section[id]').forEach(sec => {
+    if (sec.offsetTop <= scrollY) {
+      current = sec.id;
+    }
+  });
+
+  btns.forEach(btn => {
+    btn.classList.remove('active');
+    const ch = btn.getAttribute('data-ch');
+    if (current === 'ch' + ch) {
+      btn.classList.add('active');
+    }
+  });
+}
+
+window.addEventListener('scroll', updateNav, { passive: true });
+updateNav();
+</script>
+
+</body>
+</html>
