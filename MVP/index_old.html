@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Crown On Me — MVP</title>
+
+<!-- ════════════════════════════════════════════════════════════
+     POLICES — Cormorant Garamond (titres / accroches, italique = amber)
+                DM Sans (UI, body, boutons)
+     ════════════════════════════════════════════════════════════ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ════════════════════════════════════════════════════════════
+   1. VARIABLES & RESET
+   Palette stricte : 3 couleurs + 2 auxiliaires. Aucun dégradé.
+   Coins carrés partout (border-radius: 0).
+   ════════════════════════════════════════════════════════════ */
+:root{
+  --noir:   #0d0d0b;   /* texte · fond nuit · trait            */
+  --amber:  #c9854a;   /* accent · CTA · italique              */
+  --ivoire: #f2ece0;   /* fond principal · mode jour           */
+  --kraft:  #d4b896;   /* séparateurs · sous-textes (sparingly)*/
+  --taupe:  #8b7355;   /* textes secondaires (sparingly)       */
+  --nuit-filet: #3a352c; /* filet discret sur fond nuit        */
+}
+
+*,*::before,*::after{ box-sizing:border-box; border-radius:0 !important; margin:0; padding:0; }
+
+html,body{ height:100%; }
+
+body{
+  font-family:'DM Sans',sans-serif;
+  font-weight:300;
+  color:var(--noir);
+  /* Le décor autour du téléphone (utile en desktop) */
+  background:#000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ════════════════════════════════════════════════════════════
+   2. CADRE TÉLÉPHONE — mobile-first 390 × 844
+   Sur mobile : plein écran. Sur desktop : maquette centrée.
+   ════════════════════════════════════════════════════════════ */
+#phone{
+  width:390px;
+  height:844px;
+  max-height:100vh;
+  background:var(--ivoire);
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 2px 30px rgba(0,0,0,.5);
+}
+@media (max-width:430px){
+  body{ background:var(--ivoire); }
+  #phone{ width:100vw; height:100vh; max-height:none; box-shadow:none; }
+}
+
+/* ════════════════════════════════════════════════════════════
+   3. ÉCRANS — 7 <section> superposées, une seule visible
+   ════════════════════════════════════════════════════════════ */
+.screen{
+  position:absolute; inset:0;
+  display:none;                 /* masqué par défaut          */
+  flex-direction:column;
+  background:var(--ivoire);
+}
+.screen.active{ display:flex; } /* .active = écran courant    */
+
+/* Mode nuit (écran 4 · chargement) */
+.screen--night{ background:var(--noir); color:var(--ivoire); }
+
+/* --- Status bar (9:41 · ● ● ●) --- */
+.statusbar{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:16px 24px 0;
+  font-size:12px; color:var(--taupe); letter-spacing:.04em;
+}
+.statusbar .dots{ letter-spacing:.12em; }
+
+/* --- Header : wordmark + pagination, séparé par un filet 1px --- */
+.header{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:16px 24px 18px;
+  border-bottom:1px solid var(--noir);
+}
+.screen--night .header{ border-bottom-color:var(--nuit-filet); }
+
+.wordmark{
+  font-family:'Cormorant Garamond',serif; font-weight:300;
+  font-size:19px; letter-spacing:.04em;
+}
+.wordmark em{ font-style:italic; color:var(--amber); }
+
+.pager{
+  font-family:monospace; font-size:11px;
+  color:var(--taupe); letter-spacing:.08em;
+}
+
+/* --- Corps : padding 24px, prend l'espace restant --- */
+.body{ flex:1; display:flex; flex-direction:column; padding:30px 24px 24px; overflow:hidden; }
+.spacer{ flex:1; }            /* pousse le contenu vers le bas */
+
+/* --- Typo utilitaire --- */
+.eyebrow{
+  font-size:11px; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--taupe); line-height:1.8;
+}
+.display{
+  font-family:'Cormorant Garamond',serif; font-weight:300;
+  line-height:.92; letter-spacing:.02em;
+}
+.display em, .title em, .accroche em{ font-style:italic; color:var(--amber); }
+.title{
+  font-family:'Cormorant Garamond',serif; font-weight:300;
+  line-height:1.02;
+}
+.accroche{
+  font-family:'Cormorant Garamond',serif; font-weight:300;
+  font-size:31px; line-height:1.25;
+}
+.note{ font-size:13px; color:var(--taupe); letter-spacing:.06em; }
+.rule{ height:1px; background:var(--noir); }
+.mono{ font-family:monospace; }
+
+/* ════════════════════════════════════════════════════════════
+   4. BOUTONS
+   - CTA amber : 1 seul par écran, full-bleed, 60px, collé en bas
+   - Outline   : bordure noire 1px, 52px, fond transparent
+   ════════════════════════════════════════════════════════════ */
+.cta{
+  height:60px; background:var(--amber); color:var(--noir);
+  border:none; width:100%;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'DM Sans',sans-serif; font-size:13px; font-weight:300;
+  letter-spacing:.16em; text-transform:uppercase; cursor:pointer;
+  flex-shrink:0;
+}
+.cta:disabled{ opacity:.35; cursor:not-allowed; }
+
+.btn-outline{
+  height:52px; border:1px solid var(--noir); background:transparent;
+  color:var(--noir); width:100%;
+  display:flex; align-items:center; justify-content:center; text-align:center;
+  font-family:'DM Sans',sans-serif; font-size:13px; font-weight:300;
+  letter-spacing:.12em; text-transform:uppercase; cursor:pointer; line-height:1.2;
+}
+
+/* ════════════════════════════════════════════════════════════
+   5. ÉCRAN 1 · ACCUEIL
+   ════════════════════════════════════════════════════════════ */
+#screen1 .body{ padding:40px 24px 24px; }
+#screen1 .display{ font-size:74px; margin-top:34px; }
+#screen1 .display em{ font-size:.82em; display:block; letter-spacing:.08em; margin-top:.04em; }
+
+/* ════════════════════════════════════════════════════════════
+   6. ÉCRAN 2 · UPLOAD
+   ════════════════════════════════════════════════════════════ */
+.dropzone{
+  flex:1; margin-top:26px;
+  border:1px dashed var(--noir);
+  /* Aplat « film » discret (pas un dégradé : hachures franches) */
+  background:repeating-linear-gradient(135deg,#e7dcc4 0 7px,#efe7d7 7px 14px);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px;
+  cursor:pointer; position:relative; overflow:hidden;
+}
+.dropzone.dragover{ border-color:var(--amber); }
+.dropzone .plus{
+  width:46px; height:46px; border:1px solid var(--noir);
+  display:flex; align-items:center; justify-content:center;
+  font-size:26px; font-weight:200; line-height:1; color:var(--noir);
+}
+.dropzone .hint{
+  font-family:monospace; font-size:11px; letter-spacing:.1em;
+  color:var(--taupe); text-align:center;
+}
+/* Prévisualisation : remplit la dropzone une fois la photo lue */
+.dropzone .preview{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; display:none;
+}
+.dropzone.has-photo .plus,
+.dropzone.has-photo .hint{ display:none; }
+.dropzone.has-photo .preview{ display:block; }
+
+.reassure{
+  display:flex; gap:8px; align-items:flex-start; margin-top:18px;
+  font-size:13px; color:var(--taupe); line-height:1.5;
+}
+.reassure .dash{ color:var(--amber); }
+
+/* ════════════════════════════════════════════════════════════
+   7. ÉCRAN 3 · CHOIX DU STYLE — grille 2×2
+   ════════════════════════════════════════════════════════════ */
+.style-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:22px; }
+.style-card{ border:1px solid var(--noir); background:#fff; cursor:pointer; }
+.style-card .thumb{
+  height:104px; position:relative; overflow:hidden;
+  background:repeating-linear-gradient(135deg,#e7dcc4 0 7px,#efe7d7 7px 14px);
+}
+.style-card .thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+.style-card .meta{ padding:9px 10px; }
+.style-card .meta .name{ font-size:13px; color:var(--noir); }
+.style-card .meta .by{ font-size:10px; color:var(--taupe); margin-top:2px; }
+/* Carte sélectionnée : bordure amber 2px + badge */
+.style-card.selected{ border:2px solid var(--amber); }
+.style-card .badge{
+  position:absolute; top:6px; left:6px; display:none;
+  background:var(--amber); color:var(--noir);
+  font-size:9px; letter-spacing:.1em; text-transform:uppercase; padding:3px 6px;
+}
+.style-card.selected .badge{ display:block; }
+
+.confiance{
+  border-top:1px solid var(--kraft); padding-top:14px; margin-top:18px;
+  font-size:12.5px; color:var(--taupe); line-height:1.55;
+}
+
+/* ════════════════════════════════════════════════════════════
+   8. ÉCRAN 4 · CHARGEMENT (mode nuit)
+   ════════════════════════════════════════════════════════════ */
+@keyframes comSpin{ to{ transform:rotate(360deg); } }
+@keyframes comFill{ 0%{ width:4%; } 100%{ width:96%; } }
+@keyframes comPulse{ 0%,100%{ opacity:.35; } 50%{ opacity:1; } }
+
+#screen4 .body{ align-items:center; justify-content:center; text-align:center; padding:40px 36px; }
+.spinner{
+  width:56px; height:56px; border:1px solid var(--amber);
+  border-top-color:transparent; border-radius:50% !important;
+  animation:comSpin 1.1s linear infinite;
+}
+#screen4 .eyebrow{ color:var(--kraft); margin-top:48px; letter-spacing:.22em; }
+#screen4 .title{ font-size:33px; line-height:1.2; margin-top:18px; }
+.progress{
+  width:100%; height:1px; background:var(--nuit-filet);
+  margin-top:44px; position:relative; overflow:hidden;
+}
+.progress > span{
+  position:absolute; top:0; left:0; height:1px; background:var(--amber);
+  animation:comFill 2.4s ease-in-out infinite alternate;
+}
+#screen4 .legend{
+  font-family:monospace; font-size:11px; letter-spacing:.1em;
+  color:var(--taupe); margin-top:14px; animation:comPulse 1.8s ease-in-out infinite;
+}
+#screen4 .footer-night{ padding:0 36px 40px; text-align:center; font-size:13px; color:var(--taupe); line-height:1.6; }
+/* Zone d'erreur réseau (cachée par défaut) */
+#loadError{ display:none; margin-top:34px; }
+#loadError .msg{ font-size:13px; color:var(--ivoire); line-height:1.5; }
+#loadError .retry{
+  margin-top:18px; border:1px solid var(--amber); color:var(--amber);
+  background:transparent; height:46px; padding:0 26px; cursor:pointer;
+  font-size:12px; letter-spacing:.12em; text-transform:uppercase;
+}
+
+/* ════════════════════════════════════════════════════════════
+   9. ÉCRAN 5 · RÉSULTAT AVANT/APRÈS
+   ════════════════════════════════════════════════════════════ */
+#screen5 .body{ padding:24px 24px 22px; }
+.result-head{ display:flex; justify-content:space-between; align-items:flex-end; }
+.result-head .title{ font-size:34px; line-height:1.0; margin-top:6px; }
+.share{
+  font-size:12px; color:var(--taupe); text-decoration:underline;
+  text-underline-offset:3px; cursor:pointer; padding-bottom:4px; background:none; border:none;
+}
+.ba-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:22px; }
+.ba-grid .frame{ height:228px; overflow:hidden; }
+.ba-grid img{ width:100%; height:100%; object-fit:cover; display:block; }
+.frame.avant{ border:1px solid var(--noir); background:repeating-linear-gradient(135deg,#e2d6bd 0 7px,#ece2cf 7px 14px); }
+.frame.apres{ border:2px solid var(--amber); background:repeating-linear-gradient(135deg,#cdbb90 0 7px,#d8c8a8 7px 14px); }
+.ba-label{ font-family:monospace; font-size:10px; letter-spacing:.14em; text-align:center; margin-top:8px; }
+.ba-label.avant{ color:var(--taupe); }
+.ba-label.apres{ color:var(--amber); }
+.mention{
+  border-top:1px solid var(--kraft); margin-top:20px; padding-top:14px;
+  font-size:13px; color:var(--taupe); line-height:1.5;
+}
+.mention strong{ color:var(--noir); font-weight:400; }
+.dual-btn{ display:flex; gap:10px; margin-top:18px; }
+.dual-btn .btn-outline{ flex:1; height:50px; font-size:12px; letter-spacing:.06em; }
+
+/* ════════════════════════════════════════════════════════════
+   10. ÉCRAN 6 · PROFIL COIFFEUSE
+   Le profil est riche → corps défilable (le CTA reste collé en bas).
+   ════════════════════════════════════════════════════════════ */
+#screen6 .body{ padding:28px 24px 22px; overflow-y:auto; }
+/* Localisation du salon */
+.locbox{ display:flex; gap:10px; align-items:flex-start; margin-top:12px; }
+.locbox .pin{ color:var(--amber); font-size:12px; line-height:1.5; }
+.loc-addr{ font-size:14px; color:var(--noir); line-height:1.4; }
+.loc-metro{ font-size:12px; color:var(--taupe); margin-top:3px; }
+/* Listes éditoriales prestations / produits : nom à gauche, prix à droite */
+.listing{ margin-top:12px; }
+.listing .row{
+  display:flex; justify-content:space-between; align-items:baseline;
+  padding:11px 0; border-bottom:1px solid var(--kraft);
+}
+.listing .row:first-child{ border-top:1px solid var(--kraft); }
+.listing .row .name{ font-size:14px; color:var(--noir); }
+.listing .row .price{
+  font-family:'Cormorant Garamond',serif; font-size:19px; color:var(--amber); white-space:nowrap; padding-left:14px;
+}
+.profile-head{ display:flex; gap:18px; align-items:center; }
+.avatar{
+  width:88px; height:88px; flex-shrink:0; overflow:hidden;
+  border:1px solid var(--noir);
+  background:repeating-linear-gradient(135deg,#cdbb90 0 6px,#d8c8a8 6px 12px);
+}
+.avatar img{ width:100%; height:100%; object-fit:cover; display:block; }
+.profile-head .title{ font-size:34px; line-height:1.0; margin-top:4px; }
+.profile-head .salon{ font-size:13px; color:var(--taupe); margin-top:6px; }
+.rating{
+  display:flex; align-items:center; gap:8px;
+  border-top:1px solid var(--kraft); border-bottom:1px solid var(--kraft);
+  padding:14px 0; margin-top:22px; font-size:13px; color:var(--taupe);
+}
+.rating .star{ color:var(--amber); font-size:15px; }
+.rating .val{ color:var(--noir); }
+.label-mini{ font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--taupe); margin-top:22px; }
+.chips{ display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+.chip{ border:1px solid var(--noir); padding:7px 12px; font-size:12.5px; }
+.info-box{ display:grid; grid-template-columns:1fr 1fr; margin-top:24px; border:1px solid var(--kraft); }
+.info-box .cell{ padding:14px 16px; }
+.info-box .cell:first-child{ border-right:1px solid var(--kraft); }
+.info-box .k{ font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--taupe); }
+.info-box .v{ font-family:'Cormorant Garamond',serif; font-size:22px; margin-top:4px; }
+.info-box .v.small{ font-family:'DM Sans',sans-serif; font-size:14px; margin-top:6px; line-height:1.4; }
+.insta{ font-family:monospace; font-size:12px; color:var(--taupe); letter-spacing:.04em; }
+#screen6 .btn-outline{ margin-top:14px; }
+
+/* ════════════════════════════════════════════════════════════
+   11. ÉCRAN 7 · PORTFOLIO — grille 2×2 cliquable
+   ════════════════════════════════════════════════════════════ */
+#screen7 .body{ padding:26px 24px 22px; }
+#screen7 .title{ font-size:34px; line-height:1.02; margin-top:8px; }
+.portfolio-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:22px; }
+.portfolio-card .thumb{
+  height:150px; border:1px solid var(--noir); cursor:pointer; overflow:hidden;
+  background:repeating-linear-gradient(135deg,#e2d6bd 0 7px,#ece2cf 7px 14px);
+}
+.portfolio-card .thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+.portfolio-card .name{ font-size:12.5px; margin-top:8px; }
+.portfolio-badge{
+  display:flex; gap:8px; align-items:center;
+  border:1px solid var(--kraft); padding:12px 14px; margin-top:18px;
+  font-size:12.5px; color:var(--taupe); line-height:1.45;
+}
+.portfolio-badge .star{ color:var(--amber); }
+
+/* ════════════════════════════════════════════════════════════
+   12. SETTINGS — champ clé API Fal.ai discret (bas de page, écran 1)
+   ════════════════════════════════════════════════════════════ */
+.settings{
+  border-top:1px solid var(--kraft); padding:14px 24px 18px;
+  background:var(--ivoire); flex-shrink:0;
+}
+.settings summary{
+  list-style:none; cursor:pointer; font-size:11px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--taupe);
+}
+.settings summary::-webkit-details-marker{ display:none; }
+.settings .row{ display:flex; gap:8px; margin-top:12px; }
+.settings input{
+  flex:1; border:1px solid var(--noir); background:#fff; height:42px;
+  padding:0 12px; font-family:monospace; font-size:12px; color:var(--noir);
+}
+.settings input::placeholder{ color:var(--taupe); }
+.settings button{
+  border:1px solid var(--noir); background:var(--noir); color:var(--ivoire);
+  padding:0 16px; font-size:11px; letter-spacing:.1em; text-transform:uppercase; cursor:pointer;
+}
+.settings .state{ font-size:11px; color:var(--taupe); margin-top:8px; }
+.settings .state.ok{ color:var(--amber); }
+
+/* ════════════════════════════════════════════════════════════
+   13. ÉCRAN 8 · RENDEZ-VOUS (écran dédié : formulaire + confirmation)
+   ════════════════════════════════════════════════════════════ */
+#screen8 .body{ padding:26px 24px 20px; overflow-y:auto; }
+#screen8 .title{ font-size:38px; line-height:1.0; margin-top:8px; }
+/* Bouton « retour page précédente » (lien discret, en haut du corps) */
+.back-link{
+  align-self:flex-start; background:none; border:none; cursor:pointer;
+  font-family:'DM Sans',sans-serif; font-weight:300; font-size:13px;
+  color:var(--taupe); letter-spacing:.04em; padding:0 0 16px;
+}
+/* Rappel coiffeuse + localisation */
+.rdv-recap{
+  display:flex; gap:12px; align-items:center;
+  border:1px solid var(--kraft); padding:12px 14px; margin-top:20px;
+}
+.rdv-recap .av{ width:46px; height:46px; flex-shrink:0; overflow:hidden; border:1px solid var(--noir);
+  background:repeating-linear-gradient(135deg,#cdbb90 0 6px,#d8c8a8 6px 12px); }
+.rdv-recap .av img{ width:100%; height:100%; object-fit:cover; display:block; }
+.rdv-recap .who{ font-size:13px; color:var(--noir); }
+.rdv-recap .where{ font-size:12px; color:var(--taupe); margin-top:2px; }
+/* Champs de formulaire (style éditorial, coins carrés) */
+.field{
+  width:100%; border:1px solid var(--noir); background:#fff; height:48px;
+  padding:0 14px; margin-top:10px; color:var(--noir);
+  font-family:'DM Sans',sans-serif; font-size:15px; font-weight:300;
+}
+.field::placeholder{ color:var(--taupe); }
+select.field{ cursor:pointer; appearance:none; background:#fff; }
+/* Créneaux sélectionnables (réutilise .chip) */
+#rdvSlots{ margin-top:12px; }
+#rdvSlots .chip{ cursor:pointer; }
+#rdvSlots .chip.selected{ background:var(--amber); border-color:var(--amber); color:var(--noir); }
+/* Vue confirmation */
+#rdvDone{ display:none; flex-direction:column; align-items:center; text-align:center; padding-top:30px; }
+#rdvDone .check{
+  width:64px; height:64px; border:1px solid var(--amber); border-radius:50% !important;
+  display:flex; align-items:center; justify-content:center; color:var(--amber); font-size:28px;
+}
+#rdvDone .title{ font-size:34px; margin-top:22px; }
+#rdvDone .sub{ font-size:14px; color:var(--taupe); line-height:1.55; margin-top:14px; }
+</style>
+</head>
+
+<body>
+<!-- ════════════════════════════════════════════════════════════
+     CADRE TÉLÉPHONE — contient les 8 écrans (7 du parcours + RDV dédié)
+     ════════════════════════════════════════════════════════════ -->
+<div id="phone">
+
+  <!-- ══════════ ÉCRAN 1 · ACCUEIL ══════════ -->
+  <section id="screen1" class="screen active">
+    <div class="statusbar"><span>9:41</span><span class="dots">● ● ●</span></div>
+    <div class="header">
+      <div class="wordmark">Crown <em>on me</em></div>
+      <div class="pager">01 / 08</div>
+    </div>
+    <div class="body">
+      <div class="eyebrow">Cheveux texturés<br>et particulièrement afro</div>
+      <div class="display">Crown<em>on me</em></div>
+      <div class="rule" style="margin:38px 0 30px"></div>
+      <div class="accroche">Visualise ton style avant de réserver.<br><em>Fini les mauvaises surprises.</em></div>
+      <div class="spacer"></div>
+      <div class="note" style="text-align:center;margin-bottom:18px">Pas de compte · Accès immédiat</div>
+    </div>
+    <button class="cta" data-goto="2">Commencer</button>
+
+    <!-- Settings discret : clé API Fal.ai (sessionStorage) -->
+    <details class="settings">
+      <summary>Réglages · clé API Fal.ai</summary>
+      <div class="row">
+        <input id="apiKey" type="password" placeholder="fal-… (collée ici, jamais stockée durablement)">
+        <button id="saveKey" type="button">OK</button>
+      </div>
+      <div class="state" id="keyState">Aucune clé · le MVP tournera en mode démo.</div>
+    </details>
+  </section>
+
+  <!-- ══════════ ÉCRAN 2 · UPLOAD ══════════ -->
+  <section id="screen2" class="screen">
+    <div class="statusbar"><span>9:41</span><span class="dots">● ● ●</span></div>
+    <div class="header">
+      <div class="wordmark">Crown <em>on me</em></div>
+      <div class="pager">02 / 08</div>
+    </div>
+    <div class="body">
+      <div class="eyebrow">Étape 01 · Ta photo</div>
+      <div class="title" style="font-size:42px;margin-top:10px">Ta <em>photo</em></div>
+
+      <!-- Dropzone : input file caché, FileReader → base64 -->
+      <div class="dropzone" id="dropzone">
+        <div class="plus">+</div>
+        <div class="hint">GLISSE TA PHOTO<br>OU CHOISIS CI-DESSOUS</div>
+        <img class="preview" id="photoPreview" alt="">
+        <input type="file" id="fileInput" accept="image/*" hidden>
+      </div>
+
+      <button class="btn-outline" id="pickBtn" style="margin-top:18px">Choisir depuis ma galerie</button>
+      <div class="reassure"><span class="dash">—</span><span>Ta photo est traitée localement — non stockée.</span></div>
+    </div>
+    <!-- CTA désactivé tant qu'aucune photo n'est chargée -->
+    <button class="cta" id="toStyle" data-goto="3" disabled>Choisir mon style</button>
+  </section>
+
+  <!-- ══════════ ÉCRAN 3 · CHOIX DU STYLE ══════════ -->
+  <section id="screen3" class="screen">
+    <div class="statusbar"><span>9:41</span><span class="dots">● ● ●</span></div>
+    <div class="header">
+      <div class="wordmark">Crown <em>on me</em></div>
+      <div class="pager">03 / 08</div>
+    </div>
+    <div class="body">
+      <div class="eyebrow">Le portfolio de Nadège</div>
+      <div class="title" style="font-size:34px;margin-top:8px">Les réalisations<br>de <em>Nadège</em></div>
+      <!-- Grille 2×2 injectée en JS depuis l'objet `coiffeuse` -->
+      <div class="style-grid" id="styleGrid"></div>
+      <div class="spacer"></div>
+      <div class="confiance">Ces coiffures ont été réalisées par Nadège. En simulant son style, tu sais exactement ce qu'elle peut faire pour toi.</div>
+    </div>
+    <button class="cta" id="simulateBtn">Simuler ce style sur moi</button>
+  </section>
+
+  <!-- ══════════ ÉCRAN 4 · CHARGEMENT (mode nuit) ══════════ -->
+  <section id="screen4" class="screen screen--night">
+    <div class="statusbar"><span>9:41</span><span class="dots" style="color:var(--kraft)">● ● ●</span></div>
+    <div class="header">
+      <div class="wordmark" style="color:var(--ivoire)">Crown <em>on me</em></div>
+      <div class="pager">04 / 08</div>
+    </div>
+    <div class="body">
+      <!-- Vue normale (chargement) -->
+      <div id="loadView" style="display:flex;flex-direction:column;align-items:center">
+        <div class="spinner"></div>
+        <div class="eyebrow">Simulation en cours</div>
+        <div class="title">Crown <em>on me</em><br>travaille sur ta coiffure…</div>
+        <div class="progress"><span></span></div>
+        <div class="legend">DURÉE ESTIMÉE · 10–20 SECONDES</div>
+      </div>
+      <!-- Vue erreur réseau (cachée par défaut) -->
+      <div id="loadError">
+        <div class="msg" id="loadErrorMsg"></div>
+        <button class="retry" id="retryBtn">Réessayer</button>
+      </div>
+    </div>
+    <div class="footer-night">Style réalisé par Nadège K.<br>Studio Crown — Paris 18e</div>
+  </section>
+
+  <!-- ══════════ ÉCRAN 5 · RÉSULTAT AVANT/APRÈS ══════════ -->
+  <section id="screen5" class="screen">
+    <div class="statusbar"><span>9:41</span><span class="dots">● ● ●</span></div>
+    <div class="header">
+      <div class="wordmark">Crown <em>on me</em></div>
+      <div class="pager">05 / 08</div>
+    </div>
+    <div class="body">
+      <div class="result-head">
+        <div>
+          <div class="eyebrow" style="line-height:1.4">Ta simulation</div>
+          <div class="title">Avant <em>/</em> Après</div>
+        </div>
+        <button class="share" id="shareBtn">Partager</button>
+      </div>
+      <div class="ba-grid">
+        <div>
+          <div class="frame avant"><img id="beforeImg" alt="Avant"></div>
+          <div class="ba-label avant">AVANT</div>
+        </div>
+        <div>
+          <div class="frame apres"><img id="afterImg" alt="Après"></div>
+          <div class="ba-label apres">APRÈS</div>
+        </div>
+      </div>
+      <div class="mention">Style <strong id="resultStyle">Box Braids longues</strong> réalisé par Nadège K.<br>Studio Crown — Paris 18e</div>
+      <div class="spacer"></div>
+      <div class="dual-btn">
+        <button class="btn-outline" data-goto="3">Autre style</button>
+        <button class="btn-outline" data-goto="6">Voir son profil</button>
+      </div>
+    </div>
+    <button class="cta" id="bookBtn1">Prendre RDV avec Nadège</button>
+  </section>
+
+  <!-- ══════════ ÉCRAN 6 · PROFIL COIFFEUSE ══════════ -->
+  <section id="screen6" class="screen">
+    <div class="statusbar"><span>9:41</span><span class="dots">● ● ●</span></div>
+    <div class="header">
+      <div class="wordmark">Crown <em>on me</em></div>
+      <div class="pager">06 / 08</div>
+    </div>
+    <div class="body">
+      <div class="profile-head">
+        <div class="avatar"><img id="coiffeuseAvatar" alt="Nadège" onerror="this.style.display='none'"></div>
+        <div>
+          <div class="eyebrow" style="line-height:1.4">La coiffeuse</div>
+          <div class="title">Nadège <em>K.</em></div>
+          <div class="salon">Studio Crown — Paris 18e</div>
+        </div>
+      </div>
+      <div class="rating"><span class="star">★</span><span class="val">4,9</span><span>· 127 avis</span></div>
+
+      <!-- Localisation du salon -->
+      <div class="label-mini">Localisation</div>
+      <div class="locbox">
+        <span class="pin">◆</span>
+        <div>
+          <div class="loc-addr" id="coiffeuseAdresse">54 rue Doudeauville, 75018 Paris</div>
+          <div class="loc-metro" id="coiffeuseMetro">M° Château Rouge · Ligne 4</div>
+        </div>
+      </div>
+
+      <div class="label-mini">Spécialités</div>
+      <div class="chips" id="specGrid"></div>
+
+      <!-- Prestations mises en avant (service → prix) -->
+      <div class="label-mini">Prestations</div>
+      <div class="listing" id="prestaList"></div>
+
+      <!-- Produits vendus au salon (produit → prix) -->
+      <div class="label-mini">Boutique · ses produits</div>
+      <div class="listing" id="produitList"></div>
+
+      <div class="info-box" style="margin-top:24px">
+        <div class="cell"><div class="k">Tarif</div><div class="v">À partir de 80€</div></div>
+        <div class="cell"><div class="k">Disponibilité</div><div class="v small">Lun–Sam<br>9h–19h</div></div>
+      </div>
+      <div class="insta" style="margin-top:22px">@studio.crown</div>
+      <button class="btn-outline" data-goto="7" style="margin-top:14px">Voir son portfolio</button>
+    </div>
+    <button class="cta" id="bookBtn2">Prendre RDV</button>
+  </section>
+
+  <!-- ══════════ ÉCRAN 7 · PORTFOLIO COIFFEUSE ══════════ -->
+  <section id="screen7" class="screen">
+    <div class="statusbar"><span>9:41</span><span class="dots">● ● ●</span></div>
+    <div class="header">
+      <div class="wordmark">Crown <em>on me</em></div>
+      <div class="pager">07 / 08</div>
+    </div>
+    <div class="body">
+      <div class="eyebrow">Studio Crown — Paris 18e</div>
+      <div class="title">Le portfolio<br>de <em>Nadège</em></div>
+      <!-- Grille 2×2 injectée en JS, chaque carte relance une simulation -->
+      <div class="portfolio-grid" id="portfolioGrid"></div>
+      <div class="spacer"></div>
+      <div class="portfolio-badge"><span class="star">★</span><span>Les styles que tu vois viennent de vraies coiffeuses.</span></div>
+      <!-- Retour vers le profil de Nadège -->
+      <button class="btn-outline" data-goto="6" style="margin-top:14px">← Retour au profil de Nadège</button>
+    </div>
+    <button class="cta" id="bookBtn3">Prendre rendez-vous avec Nadège</button>
+  </section>
+
+  <!-- ══════════ ÉCRAN 8 · RENDEZ-VOUS (dédié) ══════════ -->
+  <section id="screen8" class="screen">
+    <div class="statusbar"><span>9:41</span><span class="dots">● ● ●</span></div>
+    <div class="header">
+      <div class="wordmark">Crown <em>on me</em></div>
+      <div class="pager">08 / 08</div>
+    </div>
+    <div class="body">
+      <!-- Bouton retour vers l'écran précédent (Résultat / Profil / Portfolio) -->
+      <button class="back-link" data-back>← Retour</button>
+      <!-- VUE 1 · Formulaire de demande -->
+      <div id="rdvForm">
+        <div class="eyebrow">Studio Crown — Paris 18e</div>
+        <div class="title">Prendre <em>rendez-vous</em></div>
+
+        <!-- Rappel coiffeuse + localisation -->
+        <div class="rdv-recap">
+          <div class="av"><img id="rdvAvatar" alt="Nadège" onerror="this.style.display='none'"></div>
+          <div>
+            <div class="who">Avec <strong>Nadège K.</strong></div>
+            <div class="where" id="rdvWhere">54 rue Doudeauville, 75018 Paris</div>
+          </div>
+        </div>
+
+        <div class="label-mini">Prestation souhaitée</div>
+        <select class="field" id="rdvPresta"></select>
+
+        <div class="label-mini" style="margin-top:18px">Tes coordonnées</div>
+        <input class="field" id="rdvNom" type="text" placeholder="Prénom et nom">
+        <input class="field" id="rdvTel" type="tel" placeholder="Téléphone">
+
+        <div class="label-mini" style="margin-top:18px">Quand ?</div>
+        <input class="field" id="rdvDate" type="date">
+        <div class="chips" id="rdvSlots">
+          <span class="chip" data-slot="Matin">Matin</span>
+          <span class="chip" data-slot="Après-midi">Après-midi</span>
+          <span class="chip" data-slot="Soir">Soir</span>
+        </div>
+
+        <div class="reassure" style="margin-top:18px"><span class="dash">—</span><span>Demande sans engagement. Nadège te recontacte pour confirmer le créneau.</span></div>
+      </div>
+
+      <!-- VUE 2 · Confirmation (cachée par défaut) -->
+      <div id="rdvDone">
+        <div class="check">✓</div>
+        <div class="title">Demande <em>envoyée</em></div>
+        <div class="sub" id="rdvDoneMsg">Nadège te recontacte sous 24h pour confirmer.</div>
+        <button class="btn-outline" id="rdvCallBtn" style="margin-top:26px">Appeler le salon</button>
+        <button class="btn-outline" data-goto="1" style="margin-top:10px">Retour à l'accueil</button>
+      </div>
+    </div>
+    <!-- CTA dynamique : « Confirmer » en vue formulaire -->
+    <button class="cta" id="rdvConfirm">Confirmer ma demande</button>
+  </section>
+
+</div><!-- /#phone -->
+
+<script>
+/* ════════════════════════════════════════════════════════════
+   A. DONNÉES — coiffeuse hardcodée (1 seule dans le MVP)
+   ════════════════════════════════════════════════════════════ */
+const coiffeuse = {
+  nom: "Nadège K.",
+  salon: "Studio Crown — Paris 18e",
+  // Localisation du salon (affichée dans le profil)
+  adresse: "54 rue Doudeauville, 75018 Paris",
+  metro: "M° Château Rouge · Ligne 4",
+  specialites: ["Box Braids", "Twists", "Locks", "Twist out naturel"],
+  note: 4.9, avis: 127,
+  tarif: "À partir de 80€",
+  disponibilite: "Lun–Sam · 9h–19h",
+  // Avatar : femme afro (photo libre Unsplash)
+  photo: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=300&h=300&fit=crop",
+  instagram: "@studio.crown",
+  telephone: "06 XX XX XX XX",
+  // Prestations mises en avant (service → prix)
+  prestations: [
+    { nom: "Box Braids",        prix: "dès 80€" },
+    { nom: "Twists vanille",    prix: "90€" },
+    { nom: "Bohemian Braids",   prix: "110€" },
+    { nom: "Locks mi-longues",  prix: "120€" },
+    { nom: "Twist out naturel", prix: "70€" }
+  ],
+  // Produits vendus à la boutique du salon (produit → prix)
+  produits: [
+    { nom: "Huile de ricin & romarin",      prix: "18€" },
+    { nom: "Beurre de karité brut",         prix: "14€" },
+    { nom: "Spray hydratant cheveux texturés", prix: "16€" },
+    { nom: "Bonnet satin de nuit",          prix: "12€" }
+  ],
+  // Vraies réalisations de Nadège (photos locales du dossier Photo_style).
+  // `prompt` = description anglaise précise envoyée à Fal.ai (meilleur rendu que le nom FR).
+  styles: [
+    { nom: "Bohemian Braids",        img: "Photo_style/Bohemian_Braids.jpg",
+      prompt: "long bohemian knotless braids with loose curly wavy ends, honey blonde and caramel highlights" },
+    { nom: "Twists vanille longues",  img: "Photo_style/Vanille.jpg",
+      prompt: "long senegalese rope twists, brown hair with caramel blonde highlights, curly ends" },
+    { nom: "Twists vanille mi-longues", img: "Photo_style/Vanille_mi_long.jpg",
+      prompt: "medium length senegalese twists with curly ends, brown and caramel highlights" },
+    { nom: "Twists vanille rouge",    img: "Photo_style/Vanille_rouge.jpg",
+      prompt: "senegalese twists, copper auburn red color, curly defined ends" }
+  ]
+};
+
+/* ════════════════════════════════════════════════════════════
+   B. ÉTAT — mémoire de session (rien de persistant sauf la clé API)
+   ════════════════════════════════════════════════════════════ */
+const state = {
+  photoBase64: null,        // photo utilisatrice (data URI)
+  selectedStyle: null,      // objet style choisi { nom, img }
+  resultUrl: null           // URL/Data de l'image générée
+};
+
+/* ════════════════════════════════════════════════════════════
+   C. NAVIGATION — affiche/masque les 7 <section>
+   ════════════════════════════════════════════════════════════ */
+const navStack = [];   // historique des écrans visités (pour le bouton « retour »)
+
+function goTo(n, record = true){
+  const current = document.querySelector('.screen.active');
+  // Mémorise l'écran courant avant de changer (sauf navigation « retour »)
+  if (record && current){
+    const curNum = current.id.replace('screen', '');
+    if (curNum !== String(n)) navStack.push(curNum);
+  }
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen' + n).classList.add('active');
+  // Remonte en haut du corps de l'écran (utile si scroll)
+  const body = document.querySelector('#screen' + n + ' .body');
+  if (body) body.scrollTop = 0;
+}
+
+// Revient à l'écran précédent réellement visité (repli : accueil)
+function goBack(){
+  const prev = navStack.pop();
+  goTo(prev || 1, false);
+}
+
+// Tous les boutons avec data-goto naviguent directement
+document.querySelectorAll('[data-goto]').forEach(btn => {
+  btn.addEventListener('click', () => goTo(btn.dataset.goto));
+});
+// Boutons « retour » (data-back) → écran précédent
+document.querySelectorAll('[data-back]').forEach(btn => {
+  btn.addEventListener('click', goBack);
+});
+
+/* ════════════════════════════════════════════════════════════
+   D. CLÉ API FAL.AI — saisie discrète, stockée en sessionStorage
+   ════════════════════════════════════════════════════════════ */
+const apiKeyInput = document.getElementById('apiKey');
+const keyState = document.getElementById('keyState');
+
+function refreshKeyState(){
+  const k = sessionStorage.getItem('falKey');
+  if (k){
+    keyState.textContent = 'Clé active · simulation IA réelle (Fal.ai).';
+    keyState.classList.add('ok');
+  } else {
+    keyState.textContent = 'Aucune clé · le MVP tournera en mode démo.';
+    keyState.classList.remove('ok');
+  }
+}
+document.getElementById('saveKey').addEventListener('click', () => {
+  const v = apiKeyInput.value.trim();
+  if (v) sessionStorage.setItem('falKey', v);
+  else   sessionStorage.removeItem('falKey');
+  apiKeyInput.value = '';
+  refreshKeyState();
+});
+refreshKeyState();
+
+/* ════════════════════════════════════════════════════════════
+   E. ÉCRAN 2 · UPLOAD — FileReader → base64 + prévisualisation
+   ════════════════════════════════════════════════════════════ */
+const dropzone = document.getElementById('dropzone');
+const fileInput = document.getElementById('fileInput');
+const photoPreview = document.getElementById('photoPreview');
+const toStyleBtn = document.getElementById('toStyle');
+
+function readPhoto(file){
+  if (!file || !file.type.startsWith('image/')) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    state.photoBase64 = e.target.result;       // data URI base64
+    photoPreview.src = state.photoBase64;
+    dropzone.classList.add('has-photo');
+    toStyleBtn.disabled = false;               // active le CTA
+  };
+  reader.readAsDataURL(file);
+}
+
+// Clic sur la dropzone OU sur le bouton « galerie » → ouvre le sélecteur
+dropzone.addEventListener('click', () => fileInput.click());
+document.getElementById('pickBtn').addEventListener('click', () => fileInput.click());
+fileInput.addEventListener('change', e => readPhoto(e.target.files[0]));
+
+// Drag & drop
+['dragenter','dragover'].forEach(ev =>
+  dropzone.addEventListener(ev, e => { e.preventDefault(); dropzone.classList.add('dragover'); }));
+['dragleave','drop'].forEach(ev =>
+  dropzone.addEventListener(ev, e => { e.preventDefault(); dropzone.classList.remove('dragover'); }));
+dropzone.addEventListener('drop', e => { if (e.dataTransfer.files[0]) readPhoto(e.dataTransfer.files[0]); });
+
+/* ════════════════════════════════════════════════════════════
+   F. ÉCRAN 3 · CHOIX DU STYLE — génère la grille + sélection
+   ════════════════════════════════════════════════════════════ */
+const styleGrid = document.getElementById('styleGrid');
+
+coiffeuse.styles.forEach((style, i) => {
+  const card = document.createElement('div');
+  card.className = 'style-card';
+  card.innerHTML = `
+    <div class="thumb">
+      <div class="badge">Sélectionné</div>
+      <img src="${style.img}" alt="${style.nom}" onerror="this.style.display='none'">
+    </div>
+    <div class="meta"><div class="name">${style.nom}</div><div class="by">Réalisé par Nadège</div></div>`;
+  card.addEventListener('click', () => {
+    // Une seule carte active à la fois
+    document.querySelectorAll('#styleGrid .style-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    state.selectedStyle = style;
+  });
+  styleGrid.appendChild(card);
+});
+
+// Sélection par défaut : 1ère carte (comme la maquette)
+styleGrid.firstChild.classList.add('selected');
+state.selectedStyle = coiffeuse.styles[0];
+
+// CTA « Simuler ce style sur moi » → écran 4 + lance la génération
+document.getElementById('simulateBtn').addEventListener('click', () => {
+  if (!state.photoBase64){ goTo(2); return; }   // sécurité : besoin d'une photo
+  runSimulation();
+});
+
+/* ════════════════════════════════════════════════════════════
+   G. ÉCRAN 4 · SIMULATION — appel Fal.ai (ou mode démo)
+   Modèle fal-ai/flux/dev/image-to-image, 100% côté client.
+   ════════════════════════════════════════════════════════════ */
+const loadView = document.getElementById('loadView');
+const loadError = document.getElementById('loadError');
+const loadErrorMsg = document.getElementById('loadErrorMsg');
+
+function showLoading(){ loadView.style.display = 'flex'; loadError.style.display = 'none'; }
+function showError(msg){ loadView.style.display = 'none'; loadError.style.display = 'block'; loadErrorMsg.textContent = msg; }
+
+// Construit l'INSTRUCTION d'édition pour FLUX Kontext.
+// Kontext édite localement : on ne change QUE la coiffure, le visage/fond restent intacts.
+function buildPrompt(){
+  const s = state.selectedStyle ? (state.selectedStyle.prompt || state.selectedStyle.nom) : 'long braids';
+  return `Change the hairstyle to ${s}. Keep the exact same face, skin tone, facial features, expression and background unchanged. Photorealistic, natural afro textured hair.`;
+}
+
+async function runSimulation(){
+  goTo(4);
+  showLoading();
+
+  const key = sessionStorage.getItem('falKey');
+
+  // --- MODE DÉMO : pas de clé → on simule un délai puis on montre le style choisi.
+  //     Permet de dérouler tout le parcours en pitch sans clé Fal.ai. ---
+  if (!key){
+    demoTimer = setTimeout(() => {
+      state.resultUrl = state.selectedStyle.img;   // l'« après » = la vraie réalisation de Nadège
+      showResult();
+    }, 2600);
+    return;
+  }
+
+  // --- MODE RÉEL : appel Fal.ai image-to-image ---
+  try {
+    // FLUX Kontext = édition par instruction : change la coiffure, GARDE le visage.
+    const submit = await fetch('https://queue.fal.run/fal-ai/flux-pro/kontext', {
+      method: 'POST',
+      headers: { 'Authorization': 'Key ' + key, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        image_url: state.photoBase64,   // ta photo en data URI base64 (acceptée par Fal)
+        prompt: buildPrompt(),          // instruction « Change the hairstyle to … »
+        guidance_scale: 3.5,
+        output_format: 'jpeg'
+      })
+    });
+    if (!submit.ok) throw new Error('Réponse Fal.ai : ' + submit.status);
+    const job = await submit.json();
+
+    // Poll du statut jusqu'à complétion (queue API)
+    const result = await pollFal(job, key);
+    state.resultUrl = (result.images && result.images[0] && result.images[0].url) || state.selectedStyle.img;
+    showResult();
+  } catch (err){
+    showError("La simulation n'a pas pu aboutir (" + err.message + "). Vérifie ta connexion et ta clé API Fal.ai, puis réessaie.");
+  }
+}
+
+// Poll l'endpoint de statut renvoyé par la queue Fal.ai
+async function pollFal(job, key){
+  const statusUrl = job.status_url;
+  const responseUrl = job.response_url;
+  if (!statusUrl) return job;                      // réponse directe (rare)
+
+  for (let i = 0; i < 40; i++){                    // ~40 tentatives (timeout doux)
+    await new Promise(r => setTimeout(r, 1500));
+    const st = await fetch(statusUrl, { headers: { 'Authorization': 'Key ' + key } });
+    const data = await st.json();
+    if (data.status === 'COMPLETED'){
+      const res = await fetch(responseUrl, { headers: { 'Authorization': 'Key ' + key } });
+      return await res.json();
+    }
+    if (data.status === 'FAILED') throw new Error('génération échouée');
+  }
+  throw new Error('délai dépassé');
+}
+
+let demoTimer = null;
+// Bouton « Réessayer » sur l'écran d'erreur
+document.getElementById('retryBtn').addEventListener('click', runSimulation);
+
+/* ════════════════════════════════════════════════════════════
+   H. ÉCRAN 5 · RÉSULTAT — remplit avant/après et bascule
+   ════════════════════════════════════════════════════════════ */
+function showResult(){
+  document.getElementById('beforeImg').src = state.photoBase64 || '';
+  document.getElementById('afterImg').src  = state.resultUrl || '';
+  document.getElementById('resultStyle').textContent = state.selectedStyle ? state.selectedStyle.nom : '';
+  goTo(5);
+}
+
+// Partage natif (navigator.share) avec repli sur copie de lien
+document.getElementById('shareBtn').addEventListener('click', async () => {
+  const data = { title: 'Crown On Me', text: 'Mon style ' + (state.selectedStyle?.nom || '') + ' simulé sur Crown On Me 👑' };
+  try {
+    if (navigator.share) await navigator.share(data);
+    else { await navigator.clipboard.writeText(data.text); alert('Texte copié ✓'); }
+  } catch(e){ /* l'utilisateur a annulé le partage */ }
+});
+
+/* ════════════════════════════════════════════════════════════
+   I. ÉCRAN 6 · PROFIL — remplit avatar + chips spécialités
+   ════════════════════════════════════════════════════════════ */
+document.getElementById('coiffeuseAvatar').src = coiffeuse.photo;
+document.getElementById('coiffeuseAdresse').textContent = coiffeuse.adresse;
+document.getElementById('coiffeuseMetro').textContent = coiffeuse.metro;
+
+// Chips spécialités
+const specGrid = document.getElementById('specGrid');
+coiffeuse.specialites.forEach(s => {
+  const chip = document.createElement('span');
+  chip.className = 'chip';
+  chip.textContent = s;
+  specGrid.appendChild(chip);
+});
+
+// Petite fabrique de lignes « nom … prix » (réutilisée pour prestations + produits)
+function fillListing(targetId, items){
+  const box = document.getElementById(targetId);
+  items.forEach(it => {
+    const row = document.createElement('div');
+    row.className = 'row';
+    row.innerHTML = `<span class="name">${it.nom}</span><span class="price">${it.prix}</span>`;
+    box.appendChild(row);
+  });
+}
+fillListing('prestaList', coiffeuse.prestations);   // prestations mises en avant
+fillListing('produitList', coiffeuse.produits);     // produits vendus au salon
+
+/* ════════════════════════════════════════════════════════════
+   J. ÉCRAN 7 · PORTFOLIO — grille cliquable (relance simulation)
+   ════════════════════════════════════════════════════════════ */
+const portfolioGrid = document.getElementById('portfolioGrid');
+coiffeuse.styles.forEach(style => {
+  const card = document.createElement('div');
+  card.className = 'portfolio-card';
+  card.innerHTML = `
+    <div class="thumb"><img src="${style.img}" alt="${style.nom}" onerror="this.style.display='none'"></div>
+    <div class="name">${style.nom}</div>`;
+  // Clic → ce style devient le style choisi puis on relance la simulation
+  card.querySelector('.thumb').addEventListener('click', () => {
+    state.selectedStyle = style;
+    // Reflète aussi la sélection sur l'écran 3
+    const cards = document.querySelectorAll('#styleGrid .style-card');
+    cards.forEach(c => c.classList.remove('selected'));
+    const idx = coiffeuse.styles.indexOf(style);
+    if (cards[idx]) cards[idx].classList.add('selected');
+    if (!state.photoBase64){ goTo(2); return; }   // besoin d'une photo d'abord
+    runSimulation();
+  });
+  portfolioGrid.appendChild(card);
+});
+
+/* ════════════════════════════════════════════════════════════
+   K. ÉCRAN 8 · RENDEZ-VOUS (écran dédié)
+   Les 3 CTA « Prendre RDV » ouvrent cet écran (au lieu d'un tel: direct).
+   ════════════════════════════════════════════════════════════ */
+const rdvForm    = document.getElementById('rdvForm');
+const rdvDone    = document.getElementById('rdvDone');
+const rdvConfirm = document.getElementById('rdvConfirm');
+const rdvPresta  = document.getElementById('rdvPresta');
+
+// Pré-remplit le rappel coiffeuse + localisation
+document.getElementById('rdvAvatar').src = coiffeuse.photo;
+document.getElementById('rdvWhere').textContent = coiffeuse.adresse;
+
+// Remplit le menu déroulant des prestations
+coiffeuse.prestations.forEach(p => {
+  const opt = document.createElement('option');
+  opt.value = p.nom;
+  opt.textContent = `${p.nom} — ${p.prix}`;
+  rdvPresta.appendChild(opt);
+});
+
+// Sélection du créneau (Matin / Après-midi / Soir) — une seule valeur active
+let selectedSlot = null;
+document.querySelectorAll('#rdvSlots .chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('#rdvSlots .chip').forEach(c => c.classList.remove('selected'));
+    chip.classList.add('selected');
+    selectedSlot = chip.dataset.slot;
+  });
+});
+
+// Ouvre l'écran RDV (remet la vue formulaire à zéro), en pré-sélectionnant
+// la prestation correspondant au style choisi si disponible.
+function openRdv(){
+  rdvForm.style.display = 'block';
+  rdvDone.style.display = 'none';
+  rdvConfirm.style.display = 'flex';
+  rdvConfirm.textContent = 'Confirmer ma demande';
+  // Tente de faire correspondre le style choisi à une prestation
+  if (state.selectedStyle){
+    const match = coiffeuse.prestations.find(p =>
+      state.selectedStyle.nom.toLowerCase().includes(p.nom.toLowerCase()) ||
+      p.nom.toLowerCase().includes(state.selectedStyle.nom.split(' ')[0].toLowerCase()));
+    if (match) rdvPresta.value = match.nom;
+  }
+  goTo(8);
+}
+
+// Les 3 boutons « Prendre RDV » (écrans Résultat, Profil, Portfolio)
+['bookBtn1','bookBtn2','bookBtn3'].forEach(id => {
+  document.getElementById(id).addEventListener('click', openRdv);
+});
+
+// Validation + confirmation
+rdvConfirm.addEventListener('click', () => {
+  const nom = document.getElementById('rdvNom').value.trim();
+  const tel = document.getElementById('rdvTel').value.trim();
+  if (!nom || !tel){
+    alert('Indique au moins ton nom et ton téléphone pour que Nadège te recontacte.');
+    return;
+  }
+  // Pas de backend : on affiche une confirmation (et on garde le récap).
+  const presta = rdvPresta.value;
+  const date = document.getElementById('rdvDate').value;
+  document.getElementById('rdvDoneMsg').innerHTML =
+    `Merci <strong>${nom}</strong> — ta demande pour <strong>${presta}</strong>` +
+    (date ? ` le ${date}` : '') + (selectedSlot ? ` (${selectedSlot.toLowerCase()})` : '') +
+    ` est transmise.<br>Nadège te recontacte sous 24h au ${tel}.`;
+  rdvForm.style.display = 'none';
+  rdvDone.style.display = 'flex';
+  rdvConfirm.style.display = 'none';   // plus de CTA en vue confirmation
+});
+
+// Bouton « Appeler le salon » (vue confirmation) → tel:
+document.getElementById('rdvCallBtn').addEventListener('click', () => {
+  window.location.href = 'tel:' + coiffeuse.telephone.replace(/\s/g, '');
+});
+</script>
+</body>
+</html>

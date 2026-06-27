@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crown On Me — Identité visuelle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --noir:   #0d0d0b;
+  --amber:  #c9854a;
+  --ivoire: #f2ece0;
+  --kraft:  #d4b896;
+  --taupe:  #8b7355;
+}
+
+body {
+  background: var(--ivoire);
+  color: var(--noir);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+}
+
+/* ─── GRILLE GÉNÉRALE ─── */
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 60px 32px 80px;
+}
+
+/* ─── BLOC 1 : WORDMARK ─── */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--noir);
+  margin-bottom: 2px;
+}
+
+.hero-left {
+  padding: 56px 48px;
+  border-right: 1px solid var(--noir);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.wordmark {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(2.8rem, 5vw, 4.2rem);
+  line-height: 0.95;
+  letter-spacing: 0.04em;
+  color: var(--noir);
+}
+
+.wordmark em {
+  font-style: italic;
+  color: var(--amber);
+  display: block;
+  font-size: 0.78em;
+  margin-top: 0.1em;
+  letter-spacing: 0.1em;
+}
+
+.hero-tagline {
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: var(--taupe);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: 40px;
+  line-height: 1.8;
+}
+
+.hero-right {
+  background: var(--noir);
+  padding: 56px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hero-right-wordmark {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(2.8rem, 5vw, 4.2rem);
+  line-height: 0.95;
+  letter-spacing: 0.04em;
+  color: var(--ivoire);
+}
+
+.hero-right-wordmark em {
+  font-style: italic;
+  color: var(--amber);
+  display: block;
+  font-size: 0.78em;
+  margin-top: 0.1em;
+  letter-spacing: 0.1em;
+}
+
+.hero-right-note {
+  font-size: 0.7rem;
+  font-weight: 300;
+  color: var(--kraft);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 40px;
+  line-height: 1.8;
+}
+
+/* ─── BLOC 2 : POSITIONNEMENT ─── */
+.positioning {
+  border: 1px solid var(--noir);
+  border-top: none;
+  padding: 40px 48px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 48px;
+  align-items: center;
+  margin-bottom: 2px;
+}
+
+.pos-label {
+  font-size: 0.625rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+
+.pos-statement {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: 1.6rem;
+  line-height: 1.35;
+  color: var(--noir);
+}
+
+.pos-statement em {
+  font-style: italic;
+  color: var(--amber);
+}
+
+/* ─── BLOC 3 : PALETTE ─── */
+.palette-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--noir);
+  border-top: none;
+  margin-bottom: 2px;
+}
+
+.swatch {
+  padding: 32px 24px;
+  border-right: 1px solid var(--noir);
+}
+
+.swatch:last-child { border-right: none; }
+
+.swatch-color {
+  width: 100%;
+  height: 56px;
+  border-radius: 2px;
+  margin-bottom: 16px;
+}
+
+.swatch-name {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--noir);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.swatch-hex {
+  font-family: monospace;
+  font-size: 0.65rem;
+  color: var(--taupe);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.swatch-use {
+  font-size: 0.65rem;
+  font-weight: 300;
+  color: var(--taupe);
+  line-height: 1.5;
+}
+
+/* ─── BLOC 4 : TYPO ─── */
+.typo-block {
+  border: 1px solid var(--noir);
+  border-top: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 2px;
+}
+
+.typo-cell {
+  padding: 40px 48px;
+}
+
+.typo-cell:first-child {
+  border-right: 1px solid var(--noir);
+}
+
+.typo-cell-label {
+  font-size: 0.625rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 24px;
+  display: block;
+}
+
+.type-specimen-display {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: 2.8rem;
+  line-height: 1.05;
+  color: var(--noir);
+  margin-bottom: 8px;
+}
+
+.type-specimen-display em {
+  font-style: italic;
+  color: var(--amber);
+}
+
+.type-specimen-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: 1.4rem;
+  color: var(--taupe);
+}
+
+.type-meta {
+  margin-top: 20px;
+  font-size: 0.65rem;
+  color: var(--taupe);
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+.type-body-specimen {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--noir);
+  margin-bottom: 16px;
+}
+
+.type-body-small {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 0.8rem;
+  color: var(--taupe);
+  line-height: 1.6;
+}
+
+/* ─── BLOC 5 : MOCKUP + USAGE ─── */
+.bottom-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--noir);
+  border-top: none;
+}
+
+/* Mockup */
+.mockup-cell {
+  background: var(--noir);
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  border-right: 1px solid var(--kraft);
+}
+
+.mockup-label {
+  font-size: 0.625rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--kraft);
+  align-self: flex-start;
+}
+
+.phone-wrap {
+  background: #1a1814;
+  border-radius: 22px;
+  padding: 8px;
+  width: 160px;
+  box-shadow: 0 16px 48px #00000060;
+}
+
+.phone-screen-inner {
+  background: var(--ivoire);
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 9/18;
+  display: flex;
+  flex-direction: column;
+}
+
+.ps-status {
+  padding: 7px 10px 3px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 6px;
+  font-weight: 400;
+  color: var(--taupe);
+  font-family: 'DM Sans', sans-serif;
+}
+
+.ps-nav {
+  padding: 2px 10px 7px;
+  border-bottom: 1px solid #e8dcc8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ps-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--noir);
+}
+
+.ps-logo em { font-style: italic; color: var(--amber); }
+
+.ps-dot { width: 16px; height: 16px; background: #e8dcc8; border-radius: 50%; }
+
+.ps-body { flex: 1; padding: 10px; }
+
+.ps-eyebrow {
+  font-size: 6px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--taupe);
+  margin-bottom: 5px;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.ps-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.1;
+  color: var(--noir);
+  margin-bottom: 10px;
+}
+
+.ps-title em { font-style: italic; color: var(--amber); }
+
+.ps-card {
+  background: #ede0c8;
+  border-radius: 5px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  padding: 0 7px;
+  gap: 6px;
+  margin-bottom: 5px;
+}
+
+.ps-thumb {
+  width: 30px;
+  height: 34px;
+  border-radius: 3px;
+  background: linear-gradient(135deg, var(--noir), var(--taupe));
+  flex-shrink: 0;
+}
+
+.ps-card-name { font-size: 6.5px; font-weight: 400; color: var(--noir); font-family: 'DM Sans', sans-serif; }
+.ps-card-sub  { font-size: 5.5px; font-weight: 300; color: var(--taupe); font-family: 'DM Sans', sans-serif; margin-top: 2px; }
+
+.ps-cta {
+  background: var(--noir);
+  padding: 7px 10px 10px;
+  text-align: center;
+  font-size: 6.5px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ivoire);
+  font-family: 'DM Sans', sans-serif;
+}
+
+.ps-tabs {
+  display: flex;
+  justify-content: space-around;
+  padding: 5px 0 7px;
+  border-top: 1px solid #e8dcc8;
+}
+
+.ps-tab { width: 4px; height: 4px; border-radius: 50%; background: #e8dcc8; }
+.ps-tab.on { background: var(--amber); }
+
+/* Usage cell */
+.usage-cell {
+  padding: 40px 48px;
+}
+
+.usage-label {
+  font-size: 0.625rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 28px;
+  display: block;
+}
+
+.usage-row {
+  margin-bottom: 24px;
+}
+
+.usage-row-title {
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--noir);
+  margin-bottom: 8px;
+}
+
+.usage-row-items {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.usage-item {
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: var(--taupe);
+  padding-left: 12px;
+  position: relative;
+  line-height: 1.5;
+}
+
+.usage-item::before { content: '—'; position: absolute; left: 0; color: var(--kraft); }
+
+/* ─── FOOTER ─── */
+.kit-footer {
+  border: 1px solid var(--noir);
+  border-top: none;
+  padding: 20px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  color: var(--noir);
+}
+.footer-brand em { font-style: italic; color: var(--amber); }
+
+.footer-note {
+  font-size: 0.625rem;
+  color: var(--taupe);
+  letter-spacing: 0.1em;
+  text-align: right;
+  line-height: 1.7;
+}
+
+/* responsive */
+@media (max-width: 640px) {
+  .hero, .typo-block, .bottom-row { grid-template-columns: 1fr; }
+  .hero-left, .typo-cell:first-child, .mockup-cell { border-right: none; border-bottom: 1px solid var(--noir); }
+  .positioning { grid-template-columns: 1fr; gap: 16px; }
+  .palette-strip { grid-template-columns: 1fr; }
+  .swatch { border-right: none; border-bottom: 1px solid var(--noir); }
+  .swatch:last-child { border-bottom: none; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- WORDMARK — deux versions sur fond clair et fond noir -->
+  <div class="hero">
+    <div class="hero-left">
+      <div>
+        <div class="wordmark">
+          Crown
+          <em>on me</em>
+        </div>
+        <div class="hero-tagline">
+          Cheveux texturés<br>
+          et particulièrement afro
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div>
+        <div class="hero-right-wordmark">
+          Crown
+          <em>on me</em>
+        </div>
+        <div class="hero-right-note">
+          Sur fond sombre<br>
+          Mode nuit · Slides
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- POSITIONNEMENT -->
+  <div class="positioning">
+    <span class="pos-label">Positionnement</span>
+    <div class="pos-statement">
+      Visualise ton style avant de réserver.<br>
+      <em>Fini les mauvaises surprises.</em>
+    </div>
+  </div>
+
+  <!-- PALETTE — 3 couleurs -->
+  <div class="palette-strip">
+    <div class="swatch">
+      <div class="swatch-color" style="background:#0d0d0b"></div>
+      <span class="swatch-name">Noir encre</span>
+      <span class="swatch-hex">#0d0d0b</span>
+      <span class="swatch-use">Texte · Fond nuit · Trait</span>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#c9854a"></div>
+      <span class="swatch-name">Amber</span>
+      <span class="swatch-hex">#c9854a</span>
+      <span class="swatch-use">Accent · CTA · Italique</span>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#f2ece0; border: 1px solid #e0d4be;"></div>
+      <span class="swatch-name">Ivoire</span>
+      <span class="swatch-hex">#f2ece0</span>
+      <span class="swatch-use">Fond principal · Mode jour</span>
+    </div>
+  </div>
+
+  <!-- TYPOGRAPHIE -->
+  <div class="typo-block">
+    <div class="typo-cell">
+      <span class="typo-cell-label">Cormorant Garamond — Display</span>
+      <div class="type-specimen-display">
+        Tes cheveux,<br>
+        <em>ta couronne.</em>
+      </div>
+      <div class="type-specimen-sub">Découvrir mon style</div>
+      <div class="type-meta">
+        Weight 300 Light · Italic pour l'accent amber<br>
+        Titres · Accroches · Noms de salons
+      </div>
+    </div>
+    <div class="typo-cell">
+      <span class="typo-cell-label">DM Sans — Body</span>
+      <div class="type-body-specimen">
+        Visualise ton prochain style avant de réserver. Crown On Me simule les cheveux texturés avec précision — pour que tu arrives en salon en sachant exactement ce que tu veux.
+      </div>
+      <div class="type-body-small">
+        Weight 300 Light · Textes courants · UI · Descriptions<br>
+        Google Fonts · Disponible FlutterFlow
+      </div>
+    </div>
+  </div>
+
+  <!-- MOCKUP + USAGE -->
+  <div class="bottom-row">
+    <div class="mockup-cell">
+      <span class="mockup-label">Aperçu mobile</span>
+      <div class="phone-wrap">
+        <div class="phone-screen-inner">
+          <div class="ps-status"><span>9:41</span><span>●●●</span></div>
+          <div class="ps-nav">
+            <div class="ps-logo">Crown <em>on me</em></div>
+            <div class="ps-dot"></div>
+          </div>
+          <div class="ps-body">
+            <div class="ps-eyebrow">Bonjour, Amara</div>
+            <div class="ps-title">Quel style<br><em>aujourd'hui ?</em></div>
+            <div class="ps-card">
+              <div class="ps-thumb"></div>
+              <div>
+                <div class="ps-card-name">Box Braids longues</div>
+                <div class="ps-card-sub">Simuler · 2 min</div>
+              </div>
+            </div>
+            <div class="ps-card">
+              <div class="ps-thumb" style="background:linear-gradient(135deg,#8b3a3a,#c9854a)"></div>
+              <div>
+                <div class="ps-card-name">Twist out naturel</div>
+                <div class="ps-card-sub">Simuler · 2 min</div>
+              </div>
+            </div>
+          </div>
+          <div class="ps-cta">Simuler mon style →</div>
+          <div class="ps-tabs">
+            <div class="ps-tab on"></div>
+            <div class="ps-tab"></div>
+            <div class="ps-tab"></div>
+            <div class="ps-tab"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="usage-cell">
+      <span class="usage-label">Règles d'usage</span>
+
+      <div class="usage-row">
+        <div class="usage-row-title">Typographie</div>
+        <div class="usage-row-items">
+          <span class="usage-item">Cormorant : titres et accroches uniquement</span>
+          <span class="usage-item">L'italique amber = signature visuelle, avec parcimonie</span>
+          <span class="usage-item">DM Sans : tout le reste — UI, body, labels</span>
+        </div>
+      </div>
+
+      <div class="usage-row">
+        <div class="usage-row-title">Couleurs</div>
+        <div class="usage-row-items">
+          <span class="usage-item">Amber sur fond noir ou ivoire — jamais sur kraft</span>
+          <span class="usage-item">1 seul CTA amber par écran</span>
+          <span class="usage-item">Pas de dégradés — aplats francs</span>
+        </div>
+      </div>
+
+      <div class="usage-row">
+        <div class="usage-row-title">Ton</div>
+        <div class="usage-row-items">
+          <span class="usage-item">Direct, sobre, jamais condescendant</span>
+          <span class="usage-item">Nommer les vrais styles : box braids, locks, twist</span>
+          <span class="usage-item">"Cheveux texturés et particulièrement afro"</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="kit-footer">
+    <div class="footer-brand">Crown <em>on me</em></div>
+    <div class="footer-note">
+      Identité visuelle · Juin 2026<br>
+      Cormorant Garamond · DM Sans · 3 couleurs
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
